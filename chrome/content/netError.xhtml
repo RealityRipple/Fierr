@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html [
+  <!ENTITY % htmlDTD PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+  %htmlDTD;
+  <!ENTITY % netErrorDTD SYSTEM "chrome://global/locale/netError.dtd">
+  %netErrorDTD;
+  <!ENTITY % globalDTD SYSTEM "chrome://global/locale/global.dtd">
+  %globalDTD;
+]>
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>&loadError.label;</title>
+<style>
+<![CDATA[
+body
+{
+ margin: 0;
+ padding: 0 1em;
+ color: #000000;
+ font: message-box;
+ background: #FFFFFF url(chrome://fierr/content/ff1.png) 0 0 no-repeat fixed;
+ position: relative;
+ margin: 0;
+ padding: 0;
+}
+h1
+{
+ margin: 0 0 .6em 0;
+ border-bottom: 1px solid ThreeDLightShadow;
+ font-size: 160%;
+}
+ul, ol
+{
+ margin: 0;
+ -moz-margin-start: 1.5em;
+ padding: 0;
+}
+ul > li, ol > li
+{
+ margin-bottom: .5em;
+}
+ul
+{
+ list-style: square;
+}
+#errorPageContainer
+{
+ background: #FFFFFF url(chrome://fierr/content/ff2.png) 0 0 no-repeat fixed;
+ -moz-opacity: 0.65;
+ min-width: 550px;
+ max-width: 65em;
+ position: absolute;
+ top: 30px;
+ left: 170px;
+ right: 25px;
+ color: #000000;
+ font: 13px Verdana, sans-serif;
+ padding: 10px;
+ border: 2px solid;
+ border-top-color: #666666;
+ border-left-color: #666666;
+ border-right-color: #DDDDDD;
+ border-bottom-color: #DDDDDD;
+}
+body[dir="rtl"] #errorPageContainer
+{
+ background-position: right 0;
+}
+#errorTitle
+{
+ -moz-margin-start: 80px;
+}
+#errorLongContent
+{
+ -moz-margin-start: 80px;
+}
+#errorShortDesc > p
+{
+ overflow: auto;
+ border-bottom: 1px solid ThreeDLightShadow;
+ padding-bottom: 1em;
+ font-size: 130%;
+}
+#errorLongDesc
+{
+ -moz-padding-end: 3em;
+ font-size: 110%;
+}
+#errorLongDesc > p
+{
+}
+#errorTryAgain
+{
+  margin-top: 2em;
+  -moz-margin-start: 80px;
+}
+#brand
+{
+  position: absolute;
+  right: 0;
+  bottom: -1.5em;
+  -moz-margin-end: 10px;
+  opacity: .4;
+}
+body[dir="rtl"] #brand
+{
+  right: auto;
+  left: 0;
+}
+#brand > p
+{
+  margin: 0;
+}
+
+#errorContainer
+{
+  display: none;
+}
+]]>
+</style>
+ <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAANbY1E9YMgAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAICSURBVHjaYvz//z8DJQAggJhwiDPvnmlzc2aR0O+JGezt+AwACCCsBhxfYhn59N41FWtXIxZOLu70niRGXVwGAAQQNgNYHj96O8HaWYdJW5ubwd4/mI2Ng7sblwEAAYRhwMm1URk/vn4SUNWVYGD8+YZBXZOZm5OLzRjoCmNsBgAEEKoBN82Y7l851GLrqMjM8Oc7A8O/3wwMP54wuAQFCXNycUzGZgBAAKEYcOaKZO2/f//5FbUVgBrfMoRVcgHpNwyKGjKMXDwCan0prFboBgAEELIBzDcvXyy2cVZhYPj9GWj7H4jo/38MDJ9OMDj7O/KzsjH3oxsAEEBwA/bNNipiZf7FI6cqwcDw8x2qqp8fGORUpVn4BEXlgGHhhCwFEEAwA9gfP3hdZ+Oizcjw+wvCdjgAuuLrFQbXIH9hTm7uqcgyAAEENuD4ctcebm5mbikFYRTbV7V/Q6j88Z5BSuY7q4CQgAjQFR4wYYAAAhtw89L5ZFsnRaDtn4CW/YXrAQcisit+PGVwDgrnZ2NnnwATBQggpsNLvGYLCAmxi8tLARWg+h3FBVBXSEj/ZZWQkRcCuiIQJAQQQCyvnj5KMDTkZ2JgYmRg4FchnHv+vmEwttLmeXT3VjKQtx4ggFgk5TXebV63UfT3ijOMxOZAVlZWdiB1EMQGCCBGSrMzQIABAFR3kRM3KggZAAAAAElFTkSuQmCC" />
+ <script type="application/x-javascript"><![CDATA[
+  function getErrorCode()
+  {
+   var url = document.documentURI;
+   var error = url.search(/e\=/);
+   var duffUrl = url.search(/\&u\=/);
+   return decodeURIComponent(url.slice(error + 2, duffUrl));
+  }
+  function getOriginalPage()
+  {
+   var location = window.content.location.href;
+   var parts = location.split("#");
+   return parts[0];
+  }
+  function reloadPage()
+  {
+   window.content.location.href = getOriginalPage();
+  }
+  function backPage()
+  {
+   history.back();
+  }
+  function googlePage()
+  {
+   window.content.location.href = "http://www.google.com/search?q="+getOriginalPage()+"&rls=org.mozilla:en-US:official&client=firefox-a";
+  }
+  function getDescription()
+  {
+   var url = document.documentURI;
+   var desc = url.search(/d\=/);
+   if (desc == -1) return "";
+   return decodeURIComponent(url.slice(desc + 2));
+  }
+  function initPage()
+  {
+   var err = getErrorCode();
+   var errTitle = document.getElementById("et_" + err);
+   var errDesc  = document.getElementById("ed_" + err);
+   if (!errTitle || !errDesc)
+   {
+    errTitle = document.getElementById("et_generic");
+    errDesc  = document.getElementById("ed_generic");
+   }
+   var title = document.getElementById("errorTitleText");
+   if (title)
+   {
+    title.parentNode.replaceChild(errTitle, title);
+    errTitle.id = "errorTitleText";
+   }
+   var sd = document.getElementById("errorShortDescText");
+   if (sd)
+    sd.textContent = getDescription();
+   var ld = document.getElementById("errorLongDesc");
+   if (ld)
+   {
+    ld.parentNode.replaceChild(errDesc, ld);
+    errDesc.id = "errorLongDesc";
+   }
+   var errContainer = document.getElementById("errorContainer");
+   errContainer.parentNode.removeChild(errContainer);
+  }
+]]></script>
+ </head>
+ <body bgcolor="#fff" dir="&locale.dir;" style="overflow: hidden;">
+  <div id="errorContainer">
+   <div id="errorTitlesContainer">
+    <h1 id="et_generic">&generic.title;</h1>
+    <h1 id="et_dnsNotFound">&dnsNotFound.title;</h1>
+    <h1 id="et_fileNotFound">&fileNotFound.title;</h1>
+    <h1 id="et_malformedURI">&malformedURI.title;</h1>
+    <h1 id="et_protocolNotFound">&protocolNotFound.title;</h1>
+    <h1 id="et_connectionFailure">&connectionFailure.title;</h1>
+    <h1 id="et_netTimeout">&netTimeout.title;</h1>
+    <h1 id="et_redirectLoop">&redirectLoop.title;</h1>
+    <h1 id="et_unknownSocketType">&unknownSocketType.title;</h1>
+    <h1 id="et_netReset">&netReset.title;</h1>
+    <h1 id="et_netOffline">&netOffline.title;</h1>
+    <h1 id="et_netInterrupt">&netInterrupt.title;</h1>
+    <h1 id="et_deniedPortAccess">&deniedPortAccess.title;</h1>
+    <h1 id="et_proxyResolveFailure">&proxyResolveFailure.title;</h1>
+    <h1 id="et_proxyConnectFailure">&proxyConnectFailure.title;</h1>
+   </div>
+   <div id="errorDescriptionsContainer">
+    <div id="ed_generic">&generic.longDesc;</div>
+    <div id="ed_dnsNotFound">&dnsNotFound.longDesc;</div>
+    <div id="ed_fileNotFound">&fileNotFound.longDesc;</div>
+    <div id="ed_malformedURI">&malformedURI.longDesc;</div>
+    <div id="ed_protocolNotFound">&protocolNotFound.longDesc;</div>
+    <div id="ed_connectionFailure">&connectionFailure.longDesc;</div>
+    <div id="ed_netTimeout">&netTimeout.longDesc;</div>
+    <div id="ed_redirectLoop">&redirectLoop.longDesc;</div>
+    <div id="ed_unknownSocketType">&unknownSocketType.longDesc;</div>
+    <div id="ed_netReset">&netReset.longDesc;</div>
+    <div id="ed_netOffline">&netOffline.longDesc;</div>
+    <div id="ed_netInterrupt">&netInterrupt.longDesc;</div>
+    <div id="ed_deniedPortAccess">&deniedPortAccess.longDesc;</div>
+    <div id="ed_proxyResolveFailure">&proxyResolveFailure.longDesc;</div>
+    <div id="ed_proxyConnectFailure">&proxyConnectFailure.longDesc;</div>
+   </div>
+  </div>
+  <div id="errorPageContainer">
+   <div id="errorTitle">
+    <h1 id="errorTitleText" />
+   </div>
+   <div id="errorLongContent">
+    <div id="errorShortDesc">
+     <p id="errorShortDescText" />
+    </div>
+    <div id="errorLongDesc" />
+   </div>
+   <xul:hbox xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" align="center" pack="left" autostretch="never" orient="horizontal">
+    <xul:spacer xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" style="width: 75px" />
+    <xul:button xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="tryBack" label="&lt;&lt; Go Back" style="width: 100px" oncommand="backPage();" />
+    <xul:spacer xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" style="width: 75px" />
+    <xul:button xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="tryAgain" label="Reload" style="width: 100px" oncommand="reloadPage();" />
+    <xul:spacer xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" style="width: 75px" />
+    <xul:button xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="tryGoogle" label="Search" style="width: 100px" oncommand="googlePage();" />
+   </xul:hbox>
+  </div>
+  <script type="application/x-javascript">initPage();</script>
+   <img src="chrome://fierr/content/spc.png" style="width: 550px;" />
+ </body>
+</html>

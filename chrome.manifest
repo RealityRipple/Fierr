@@ -1,0 +1,3 @@
+content     fierr                                  chrome/content/
+override    chrome://global/content/netError.xhtml chrome://fierr/content/netError.xhtml
+skin        fierr              skin                chrome/skin/

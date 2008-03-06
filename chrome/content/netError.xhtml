@@ -10,7 +10,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>&loadError.label;</title>
-<style>
+<style type="text/css">
 <![CDATA[
 body
 {
@@ -18,7 +18,7 @@ body
  padding: 0 1em;
  color: #000000;
  font: message-box;
- background: #FFFFFF url(chrome://fierr/content/ff1.png) 0 0 no-repeat fixed;
+ background: #FFFFFF url(chrome://fierr/content/ff.png) 0 0 no-repeat fixed;
  position: relative;
  margin: 0;
  padding: 0;
@@ -26,7 +26,7 @@ body
 h1
 {
  margin: 0 0 .6em 0;
- border-bottom: 1px solid ThreeDLightShadow;
+ border-bottom: 1px solid #FF7F00;
  font-size: 160%;
 }
 ul, ol
@@ -45,7 +45,7 @@ ul
 }
 #errorPageContainer
 {
- background: #FFFFFF url(chrome://fierr/content/ff2.png) 0 0 no-repeat fixed;
+ background: #FFFFFF no-repeat fixed;
  -moz-opacity: 0.65;
  min-width: 550px;
  max-width: 65em;
@@ -57,14 +57,10 @@ ul
  font: 13px Verdana, sans-serif;
  padding: 10px;
  border: 2px solid;
- border-top-color: #666666;
- border-left-color: #666666;
- border-right-color: #DDDDDD;
- border-bottom-color: #DDDDDD;
-}
-body[dir="rtl"] #errorPageContainer
-{
- background-position: right 0;
+ border-top-color: #996600;
+ border-left-color: #996600;
+ border-right-color: #DD9900;
+ border-bottom-color: #DD9900;
 }
 #errorTitle
 {
@@ -77,7 +73,7 @@ body[dir="rtl"] #errorPageContainer
 #errorShortDesc > p
 {
  overflow: auto;
- border-bottom: 1px solid ThreeDLightShadow;
+ border-bottom: 1px solid #FF7F00;
  padding-bottom: 1em;
  font-size: 130%;
 }
@@ -91,34 +87,91 @@ body[dir="rtl"] #errorPageContainer
 }
 #errorTryAgain
 {
-  margin-top: 2em;
-  -moz-margin-start: 80px;
+ margin-top: 2em;
+ -moz-margin-start: 80px;
 }
 #brand
 {
-  position: absolute;
-  right: 0;
-  bottom: -1.5em;
-  -moz-margin-end: 10px;
-  opacity: .4;
+ position: absolute;
+ right: 0;
+ bottom: -1.5em;
+ -moz-margin-end: 10px;
+ opacity: .4;
 }
 body[dir="rtl"] #brand
 {
-  right: auto;
-  left: 0;
+ right: auto;
+ left: 0;
 }
 #brand > p
 {
-  margin: 0;
+ margin: 0;
 }
-
 #errorContainer
 {
-  display: none;
+ display: none;
+}
+button
+{
+ -moz-appearance: none;
+ width: 100px;
+ height: 25px;
+ border: 1px solid !important;
+ color: #000000;
+ font-weight: bold;
+ background-color: #FF7F00;
+ -moz-border-top-colors: #FF0000;
+ -moz-border-left-colors: #FF0000;
+ -moz-border-right-colors: #7F0000;
+ -moz-border-bottom-colors: #7F0000;
+ list-style-image: url(chrome://fierr/content/buttons.png);
+}
+button:hover
+{
+ color: #FF0000;
+ background-color: #FFFF00;
+ -moz-border-top-colors: #FF0000;
+ -moz-border-left-colors: #FF0000;
+ -moz-border-right-colors: #7F0000;
+ -moz-border-bottom-colors: #7F0000;
+}
+button:hover:active
+{
+ color: #FF0000;
+ background-color: #FFFF00;
+ -moz-border-top-colors: #7F0000;
+ -moz-border-left-colors: #7F0000;
+ -moz-border-right-colors: #FF0000;
+ -moz-border-bottom-colors: #FF0000;
+ padding-top: 3px;
+ padding-bottom: 1px;
+ -moz-padding-start: 4px;
+ -moz-padding-end: 2px;
+}
+button:focus
+{
+ color: #000000;
+ background-color: #FFFF00;
+ -moz-border-top-colors: #FF0000;
+ -moz-border-left-colors: #FF0000;
+ -moz-border-right-colors: #7F0000;
+ -moz-border-bottom-colors: #7F0000;
+}
+#tryBack
+{
+ -moz-image-region: rect(0px, 16px, 16px, 0px); 
+}
+#tryAgain
+{
+ -moz-image-region: rect(16px, 16px, 32px, 0px);
+}
+#tryGoogle
+{
+ -moz-image-region: rect(32px, 16px, 48px, 0px);
 }
 ]]>
 </style>
- <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAANbY1E9YMgAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAICSURBVHjaYvz//z8DJQAggJhwiDPvnmlzc2aR0O+JGezt+AwACCCsBhxfYhn59N41FWtXIxZOLu70niRGXVwGAAQQNgNYHj96O8HaWYdJW5ubwd4/mI2Ng7sblwEAAYRhwMm1URk/vn4SUNWVYGD8+YZBXZOZm5OLzRjoCmNsBgAEEKoBN82Y7l851GLrqMjM8Oc7A8O/3wwMP54wuAQFCXNycUzGZgBAAKEYcOaKZO2/f//5FbUVgBrfMoRVcgHpNwyKGjKMXDwCan0prFboBgAEELIBzDcvXyy2cVZhYPj9GWj7H4jo/38MDJ9OMDj7O/KzsjH3oxsAEEBwA/bNNipiZf7FI6cqwcDw8x2qqp8fGORUpVn4BEXlgGHhhCwFEEAwA9gfP3hdZ+Oizcjw+wvCdjgAuuLrFQbXIH9hTm7uqcgyAAEENuD4ctcebm5mbikFYRTbV7V/Q6j88Z5BSuY7q4CQgAjQFR4wYYAAAhtw89L5ZFsnRaDtn4CW/YXrAQcisit+PGVwDgrnZ2NnnwATBQggpsNLvGYLCAmxi8tLARWg+h3FBVBXSEj/ZZWQkRcCuiIQJAQQQCyvnj5KMDTkZ2JgYmRg4FchnHv+vmEwttLmeXT3VjKQtx4ggFgk5TXebV63UfT3ijOMxOZAVlZWdiB1EMQGCCBGSrMzQIABAFR3kRM3KggZAAAAAElFTkSuQmCC" />
+ <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFcwAA/wAA/4BA//8A////HleQhwAAAAF0Uk5TAEDm2GYAAABHSURBVAjXVcnbCQAxCETRCTbglqCkgMUSgv3XFB+E3cyPBy8A0IueSV+ai2+Yu1wgdVf+wxJSmCtBmogWyHGU+siHcRKeGjYXLwyumte6bgAAAABJRU5ErkJggg==" />
  <script type="application/x-javascript"><![CDATA[
   function getErrorCode()
   {
@@ -182,7 +235,7 @@ body[dir="rtl"] #brand
   }
 ]]></script>
  </head>
- <body bgcolor="#fff" dir="&locale.dir;" style="overflow: hidden;">
+ <body dir="&locale.dir;" style="overflow: hidden;">
   <div id="errorContainer">
    <div id="errorTitlesContainer">
     <h1 id="et_generic">&generic.title;</h1>
@@ -231,14 +284,14 @@ body[dir="rtl"] #brand
    </div>
    <xul:hbox xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" align="center" pack="left" autostretch="never" orient="horizontal">
     <xul:spacer xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" style="width: 75px" />
-    <xul:button xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="tryBack" label="&lt;&lt; Go Back" style="width: 100px" oncommand="backPage();" />
+    <xul:button xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="tryBack" label="Back" oncommand="backPage();" />
     <xul:spacer xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" style="width: 75px" />
-    <xul:button xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="tryAgain" label="Reload" style="width: 100px" oncommand="reloadPage();" />
+    <xul:button xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="tryAgain" label="Reload" oncommand="reloadPage();" />
     <xul:spacer xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" style="width: 75px" />
-    <xul:button xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="tryGoogle" label="Search" style="width: 100px" oncommand="googlePage();" />
+    <xul:button xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="tryGoogle" label="Search" oncommand="googlePage();" />
    </xul:hbox>
   </div>
   <script type="application/x-javascript">initPage();</script>
-   <img src="chrome://fierr/content/spc.png" style="width: 550px;" />
+  <img src="chrome://fierr/content/spc.png" style="width: 550px;" />
  </body>
 </html>

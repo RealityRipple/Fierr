@@ -4,6 +4,8 @@
   %htmlDTD;
   <!ENTITY % netErrorDTD SYSTEM "chrome://global/locale/netError.dtd">
   %netErrorDTD;
+  <!ENTITY % ff2DummyDTD SYSTEM "chrome://fierr/content/ff2Dummy.dtd">
+  %ff2DummyDTD;
   <!ENTITY % globalDTD SYSTEM "chrome://global/locale/global.dtd">
   %globalDTD;
   <!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd">
@@ -115,24 +117,9 @@ body[dir="rtl"] #brand
 }
 button
 {
- width: 100px;
+ min-width: 100px;
  height: 25px;
  font-weight: bold;
- list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAABABAMAAADhU+qlAAAAAXNSR0IArs4c6QAAABJQTFRFAAIAAAAA/wAA/4BA//8A////cm9OugAAAAF0Uk5TAEDm2GYAAADiSURBVCjPhVFbjsQgDCPSzD9hewFSTtD0ADDlAHv/06wDYTUPrdZSVWOS2E1DeALH+abuZDsmoSu7oAxECNqBCMGAMtpVANQnr4HkXSEda7LEN69PWDPhlmHQNkzucDgfw1R289r04DRJtkO0oPQwdyPDfUUfNZDC6Np6s1zaL7VsaWa3XCL51/0tj5+5tsHofr/RIN+1tmFxA+wuQqnxWaHqNQSBos/5aj45nWsxe1u7Oj93Ff7Byky9NP/oYmOYLy3aOHTssOjZg/2tgieIGDkENTtI5rGOMrdGUvLr5L/wA70iJHaJFJLNAAAAAElFTkSuQmCC);
-}
-button.themed
-{
- -moz-appearance: none;
- width: 100px;
- height: 25px;
- border: 1px solid !important;
- color: #000000;
- font-weight: bold;
- background-color: #FF7F00;
- -moz-border-top-colors: #FF0000;
- -moz-border-left-colors: #FF0000;
- -moz-border-right-colors: #7F0000;
- -moz-border-bottom-colors: #7F0000;
  list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAABABAMAAADhU+qlAAAAAXNSR0IArs4c6QAAABJQTFRFAAIAAAAA/wAA/4BA//8A////cm9OugAAAAF0Uk5TAEDm2GYAAADiSURBVCjPhVFbjsQgDCPSzD9hewFSTtD0ADDlAHv/06wDYTUPrdZSVWOS2E1DeALH+abuZDsmoSu7oAxECNqBCMGAMtpVANQnr4HkXSEda7LEN69PWDPhlmHQNkzucDgfw1R289r04DRJtkO0oPQwdyPDfUUfNZDC6Np6s1zaL7VsaWa3XCL51/0tj5+5tsHofr/RIN+1tmFxA+wuQqnxWaHqNQSBos/5aj45nWsxe1u7Oj93Ff7Byky9NP/oYmOYLy3aOHTssOjZg/2tgieIGDkENTtI5rGOMrdGUvLr5L/wA70iJHaJFJLNAAAAAElFTkSuQmCC);
 }
 #tryBack
@@ -151,9 +138,17 @@ button.themed
 {
  -moz-image-region: rect(48px, 16px, 64px, 0px);
 }
+#getMeOutOfHereButton
+{
+ list-style-image: none;
+}
+#exceptionDialogButton
+{
+ list-style-image: none;
+}
 ]]>
 </style>
- <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFcwAA/wAA/4BA//8A////HleQhwAAAAF0Uk5TAEDm2GYAAABHSURBVAjXVcnbCQAxCETRCTbglqCkgMUSgv3XFB+E3cyPBy8A0IueSV+ai2+Yu1wgdVf+wxJSmCtBmogWyHGU+siHcRKeGjYXLwyumte6bgAAAABJRU5ErkJggg==" />
+ <link rel="icon" type="image/png" id="favicon" href="chrome://global/skin/icons/warning-16.png"/>
  <script type="application/x-javascript"><![CDATA[
   function getErrorCode()
   {
@@ -161,6 +156,14 @@ button.themed
    var error = url.search(/e\=/);
    var duffUrl = url.search(/\&u\=/);
    return decodeURIComponent(url.slice(error + 2, duffUrl));
+  }
+  function getCSSClass()
+  {
+   var url = document.documentURI;
+   var matches = url.match(/s\=([^&]+)\&/);
+   if (!matches || matches.length < 2)
+    return "";
+   return decodeURIComponent(matches[1]);
   }
   function getOriginalPage(noEnd)
   {
@@ -177,7 +180,13 @@ button.themed
   }
   function reloadPage()
   {
-   window.content.location.href = getOriginalPage(true);
+   try
+   {
+    location.reload();
+   }
+   catch (e)
+   {
+   }
   }
   function backPage()
   {
@@ -226,17 +235,52 @@ button.themed
     errDesc.id = "errorLongDesc";
    }
    var cmdOnline = document.getElementById("tryOn");
-   try
-   {
-    if (errTitle.textContent != document.getElementById("et_netOffline").textContent)
-     cmdOnline.parentNode.removeChild(cmdOnline);
-   }
-   catch(e)
-   {
-    
-   }
+   if (err != "netOffline")
+    cmdOnline.parentNode.removeChild(cmdOnline);
    var errContainer = document.getElementById("errorContainer");
    errContainer.parentNode.removeChild(errContainer);
+   var className = getCSSClass();
+   if (className == "expertBadCert")
+   {
+    showSecuritySection();
+   }
+   if (err == "nssBadCert")
+   {
+    document.getElementById("tryAgain").style.display = "none";
+    document.getElementById("errorPageContainer").setAttribute("class", "certerror");
+    addDomainErrorLink();
+   }
+   else
+   {
+    var secOverride = document.getElementById("securityOverrideDiv");
+    secOverride.parentNode.removeChild(secOverride);
+   }
+  }
+  function showSecuritySection()
+  {
+   document.getElementById('securityOverrideContent').style.display = '';
+   document.getElementById('securityOverrideLink').style.display = 'none';
+  }
+  function addDomainErrorLink()
+  {
+   var sd = document.getElementById("errorShortDescText");
+   if (sd)
+    sd.innerHTML = getDescription();
+   var link = document.getElementById('cert_domain_link');
+   if (!link)
+    return;
+   var okHost = link.getAttribute("title");
+   var thisHost = document.location.hostname;
+   var proto = document.location.protocol;
+   okHost = okHost.replace(/^\*\./, "www.");
+   if (endsWith(okHost, "." + thisHost))
+    link.href = proto + okHost;
+   if (endsWith(thisHost, "." + okHost))
+    link.href = proto + okHost;
+  }
+  function endsWith(haystack, needle)
+  {
+   return haystack.slice(-needle.length) == needle;
   }
 ]]></script>
  </head>
@@ -258,6 +302,11 @@ button.themed
     <h1 id="et_deniedPortAccess">&deniedPortAccess.title;</h1>
     <h1 id="et_proxyResolveFailure">&proxyResolveFailure.title;</h1>
     <h1 id="et_proxyConnectFailure">&proxyConnectFailure.title;</h1>
+    <h1 id="et_contentEncodingError">&contentEncodingError.title;</h1>
+    <h1 id="et_unsafeContentType">&unsafeContentType.title;</h1>
+    <h1 id="et_nssFailure2">&nssFailure2.title;</h1>
+    <h1 id="et_nssBadCert">&nssBadCert.title;</h1>
+    <h1 id="et_malwareBlocked">&malwareBlocked.title;</h1>
    </div>
    <div id="errorDescriptionsContainer">
     <div id="ed_generic">&generic.longDesc;</div>
@@ -275,6 +324,11 @@ button.themed
     <div id="ed_deniedPortAccess">&deniedPortAccess.longDesc;</div>
     <div id="ed_proxyResolveFailure">&proxyResolveFailure.longDesc;</div>
     <div id="ed_proxyConnectFailure">&proxyConnectFailure.longDesc;</div>
+    <div id="ed_contentEncodingError">&contentEncodingError.longDesc;</div>
+    <div id="ed_unsafeContentType">&unsafeContentType.longDesc;</div>
+    <div id="ed_nssFailure2">&nssFailure2.longDesc;</div>
+    <div id="ed_nssBadCert">&nssBadCert.longDesc2;</div>
+    <div id="ed_malwareBlocked">&malwareBlocked.longDesc;</div>
    </div>
   </div>
   <div id="errorPageContainer">
@@ -286,6 +340,11 @@ button.themed
      <p id="errorShortDescText" />
     </div>
     <div id="errorLongDesc" />
+    <div id="securityOverrideDiv">
+     <a id="securityOverrideLink" href="javascript:showSecuritySection();">&securityOverride.linkText;</a>
+     <div id="securityOverrideContent" style="display: none;">&securityOverride.warningText;</div>
+     <br />
+    </div>
    </div>
    <xul:hbox xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" align="center" pack="left" autostretch="never" orient="horizontal">
     <xul:spacer xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" style="width: 75px" />

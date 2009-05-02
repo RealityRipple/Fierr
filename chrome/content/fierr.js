@@ -1,58 +1,68 @@
-window.addEventListener('load', fierrListen, false);
-
-function fierrListen()
+if (!com) var com = {};
+if (!com.RealityRipple) com.RealityRipple = {};
+com.RealityRipple.Fierr = function()
 {
- window.removeEventListener('load',fierrListen, false);
- gBrowser.addProgressListener(fierrListener, Components.interfaces.nsIWebProgress.NOTIFY_STATE_REQUEST);
-}
+ var pub = {};
 
-function fierrURL(winLoc)
-{
- if (winLoc == "http://go.online/")
+ pub.Listen = function()
  {
-  if(fierrBoolPref('browser.offline',true))
+  window.removeEventListener('load',com.RealityRipple.Fierr.Listen, false);
+  gBrowser.addProgressListener(com.RealityRipple.Fierr.Listener, Components.interfaces.nsIWebProgress.NOTIFY_STATE_REQUEST);
+ }
+
+ pub.URL = function(winLoc)
+ {
+  if (winLoc == "http://go.online/")
   {
-   BrowserOffline.toggleOfflineStatus();
+   if(com.RealityRipple.Fierr.BoolPref('browser.offline',true))
+   {
+    BrowserOffline.toggleOfflineStatus();
+   }
   }
  }
-}
 
-var fierrListener =
-{
- QueryInterface: function(aIID)
+ pub.Listener =
  {
-  if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
-      aIID.equals(Components.interfaces.nsISupportsWeakReference) ||
-      aIID.equals(Components.interfaces.nsISupports))
-   return this;
-  throw Components.results.NS_NOINTERFACE;
- },
- onLocationChange: function(aProgress, aRequest, aURI)
- {
-  fierrURL(aURI.spec);
- },
- onStateChange: function() {},
- onProgressChange: function() {},
- onStatusChange: function() {},
- onSecurityChange: function() {},
- onLinkIconAvailable: function() {}
-};
+  QueryInterface: function(aIID)
+  {
+   if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
+       aIID.equals(Components.interfaces.nsISupportsWeakReference) ||
+       aIID.equals(Components.interfaces.nsISupports))
+    return this;
+   throw Components.results.NS_NOINTERFACE;
+  },
+  onLocationChange: function(aProgress, aRequest, aURI)
+  {
+   if (aURI != null)
+    com.RealityRipple.Fierr.URL(aURI.spec);
+  },
+  onStateChange: function() {},
+  onProgressChange: function() {},
+  onStatusChange: function() {},
+  onSecurityChange: function() {},
+  onLinkIconAvailable: function() {}
+ };
 
-fierrBoolPref = function(prefName, defval)
-{
- var result = defval;
- var prefservice = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
- var prefs = prefservice.getBranch("");
- if (prefs.getPrefType(prefName) == prefs.PREF_BOOL)
+ pub.BoolPref = function(prefName, defval)
  {
-  try
+  var result = defval;
+  var prefservice = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+  var prefs = prefservice.getBranch("");
+  if (prefs.getPrefType(prefName) == prefs.PREF_BOOL)
   {
-   result = prefs.getBoolPref(prefName);
+   try
+   {
+    result = prefs.getBoolPref(prefName);
+   }
+   catch(e)
+   {
+    result = defval;
+   }
   }
-  catch(e)
-  {
-   result = defval;
-  }
+  return(result);
  }
- return(result);
-}
+
+ return pub;
+}();
+
+window.addEventListener('load', com.RealityRipple.Fierr.Listen, false);

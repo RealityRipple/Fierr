@@ -283,7 +283,7 @@ com.RealityRipple.Fierr = function()
   var className = priv.getCSSClass();
   if (className == "expertBadCert")
   {
-   priv.showSecuritySection();
+   com.RealityRipple.Fierr.showSecuritySection();
   }
   if (err == "nssBadCert")
   {
@@ -296,11 +296,6 @@ com.RealityRipple.Fierr = function()
    var secOverride = document.getElementById("securityOverrideDiv");
    secOverride.parentNode.removeChild(secOverride);
   }
- }
- priv.showSecuritySection = function()
-  {
-  document.getElementById('securityOverrideContent').style.display = '';
-  document.getElementById('securityOverrideLink').style.display = 'none';
  }
  priv.addDomainErrorLink = function()
  {
@@ -323,7 +318,6 @@ com.RealityRipple.Fierr = function()
  {
   return haystack.slice(-needle.length) == needle;
  }
-
  pub.UpdateTimer = function()
  {
   if (priv.TimerID) 
@@ -346,9 +340,14 @@ com.RealityRipple.Fierr = function()
    priv.TimerID = setTimeout("com.RealityRipple.Fierr.UpdateTimer()", 1000);
   }
  }
+ pub.showSecuritySection = function()
+ {
+  document.getElementById('securityOverrideContent').style.display = '';
+  document.getElementById('securityOverrideLink').style.display = 'none';
+ }
  return pub;
 }();
-  ]]></script>
+ ]]></script>
  </head>
  <body dir="&locale.dir;" style="overflow: hidden;">
   <div id="errorContainer">
@@ -407,7 +406,7 @@ com.RealityRipple.Fierr = function()
     </div>
     <div id="errorLongDesc" />
     <div id="securityOverrideDiv">
-     <a id="securityOverrideLink" href="javascript:showSecuritySection();">&securityOverride.linkText;</a>
+     <a id="securityOverrideLink" href="javascript:com.RealityRipple.Fierr.showSecuritySection();">&securityOverride.linkText;</a>
      <div id="securityOverrideContent" style="display: none;">&securityOverride.warningText;</div>
      <br />
     </div>

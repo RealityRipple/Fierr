@@ -4,7 +4,7 @@
  <Description about="urn:mozilla:install-manifest">
   <em:name>Fierr</em:name>
   <em:id>{2E481B23-66AC-313F-D6A8-A81DDDF26249}</em:id>
-  <em:version>0.7</em:version>
+  <em:version>0.7.1</em:version>
   <em:type>2</em:type>
   <em:targetApplication>
    <Description>

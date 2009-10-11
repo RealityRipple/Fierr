@@ -1,0 +1,3 @@
+<!ENTITY errGoOnline.label   "Go Online">
+<!ENTITY errStopReload.label "Stop Reload">
+<!ENTITY errReloading.label  "Reloading...">

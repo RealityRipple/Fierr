@@ -1,0 +1,3 @@
+<!ENTITY errGoOnline.label "联机">
+<!ENTITY errStopReload.label "停止刷新">
+<!ENTITY errReloading.label "重新加载...">

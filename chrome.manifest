@@ -1,4 +1,11 @@
-content     fierr                                  chrome/content/
-override    chrome://global/content/netError.xhtml chrome://fierr/content/netError.xhtml
-skin        fierr              skin                chrome/skin/
-overlay     chrome://browser/content/browser.xul   chrome://fierr/content/fierr.xul
+content		fierr					chrome/content/
+override	chrome://global/content/netError.xhtml  chrome://fierr/content/netError.xhtml
+skin		fierr		skin			chrome/skin/
+locale 		fierr 		de-DE 			chrome/locale/de-DE/
+locale 		fierr 		en-US 			chrome/locale/en-US/
+locale 		fierr 		nl-NL 			chrome/locale/nl-NL/
+locale 		fierr 		pl-PL 			chrome/locale/pl-PL/
+locale 		fierr 		pt-BR 			chrome/locale/pt-BR/
+locale 		fierr 		ru-RU 			chrome/locale/ru-RU/
+locale 		fierr 		zh-CN 			chrome/locale/zh-CN/
+overlay		chrome://browser/content/browser.xul	chrome://fierr/content/fierr.xul

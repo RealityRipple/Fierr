@@ -1,11 +1,16 @@
 content		fierr					chrome/content/
 override	chrome://global/content/netError.xhtml  chrome://fierr/content/netError.xhtml
 skin		fierr		skin			chrome/skin/
+locale 		fierr 		da-DK 			chrome/locale/da-DK/
 locale 		fierr 		de-DE 			chrome/locale/de-DE/
 locale 		fierr 		en-US 			chrome/locale/en-US/
+locale 		fierr 		es-ES 			chrome/locale/es-ES/
+locale 		fierr 		fr 			chrome/locale/fr/
+locale 		fierr 		mk-MK 			chrome/locale/mk-MK/
 locale 		fierr 		nl-NL 			chrome/locale/nl-NL/
 locale 		fierr 		pl-PL 			chrome/locale/pl-PL/
 locale 		fierr 		pt-BR 			chrome/locale/pt-BR/
 locale 		fierr 		ru-RU 			chrome/locale/ru-RU/
+locale 		fierr 		tr-TR 			chrome/locale/tr-TR/
 locale 		fierr 		zh-CN 			chrome/locale/zh-CN/
 overlay		chrome://browser/content/browser.xul	chrome://fierr/content/fierr.xul

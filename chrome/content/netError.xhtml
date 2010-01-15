@@ -120,6 +120,7 @@ body[dir="rtl"] #brand
 button
 {
  min-width: 100px;
+ max-width: 300px;
  height: 25px;
  font-weight: bold;
  list-style-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAABQBAMAAADiheg+AAAAAXNSR0IArs4c6QAAABJQTFRFY29sAAAA/wAA/4BA//8A////gBrx2wAAAAF0Uk5TAEDm2GYAAAEaSURBVCjPhVHBjcMwDLOA9m85XsCKF3CUAeJWA9z+05wk24deC9wRCMIwssgwIbwA47iDTJKPQeBZpsCoiCqwKKIKBh2DnUmh82nOqDRPhXSszRTfvD5hh0Hfohr0rJtFHc6Hm9JuXpkPTIMUe4gWFB7mbsTdV3SfUSn4qSzdcrE82bKlkd1yEZUf97c88xmv7gzu9xs4+bqu7hY3hb2LqlzxVYFrzoAKEOeerc/N6VzF7H11dX52Ff7BygxS+/zoamsQn1y5YxDtsPIpwf5W1SsQGTlIZ3YlBb2OOloDquX35j/g5Q739Q15xoGM3lTOIqaBiP4CW52xteRNbY2NQOfGrRhRBZ1ozubDG/MYXqeAMI2EiWZNI8Y34icuMy/NuHQAAAAASUVORK5CYII=);
@@ -142,7 +143,6 @@ button
 }
 #tryStop
 {
- width: 160px;
  -moz-image-region: rect(64px, 16px, 80px, 0px);
 }
 #getMeOutOfHereButton
@@ -235,7 +235,7 @@ com.RealityRipple.Fierr = function()
  {
   var sTemp = window.content.location.href;
   window.content.location.href = "http://go.online/";
-  window.content.location.href = sTemp;
+  setTimeout("window.content.location.href = sTemp", 500);
  }
  priv.getDescription = function()
  {
@@ -274,6 +274,11 @@ com.RealityRipple.Fierr = function()
    var cmdOnline = document.getElementById("tryOn");
    cmdOnline.parentNode.removeChild(cmdOnline);
    priv.Seconds = priv.DefaultTime;
+  }
+  else
+  {
+   var cmdSearch = document.getElementById("tryGoogle");
+   cmdSearch.parentNode.removeChild(cmdSearch);
   }
   var cmdStop = document.getElementById("tryStop");
   if(err == "connectionFailure" || err == "netTimeout" ||
@@ -421,14 +426,13 @@ com.RealityRipple.Fierr = function()
      <br />
     </div>
    </div>
-   <xul:hbox xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" align="center" pack="left" autostretch="never" orient="horizontal">
-    <xul:spacer xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" style="width: 75px" />
+   <xul:hbox xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" align="center" style="-moz-margin-start: 80px;">
     <xul:button xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="tryBack"   label="&backCmd.label;"    oncommand="com.RealityRipple.Fierr.backPage();" />
-    <xul:spacer xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" style="width: 75px" />
+    <xul:spacer xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" width="33%" />
     <xul:button xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="tryAgain"  label="&reloadCmd.label;"  oncommand="com.RealityRipple.Fierr.reloadPage();" />
-    <xul:spacer xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" style="width: 75px" />
+    <xul:spacer xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" width="33%" />
     <xul:button xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="tryGoogle" label="&searchItem.title;" oncommand="com.RealityRipple.Fierr.googlePage();" />
-    <xul:spacer xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" style="width: 75px" />
+    <xul:spacer xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" width="33%" />
     <xul:button xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="tryOn"     label="&errGoOnline.label;"   oncommand="com.RealityRipple.Fierr.goOnline();" />
     <xul:button xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" id="tryStop"   label="&errStopReload.label;" oncommand="com.RealityRipple.Fierr.stopReload();" />
    </xul:hbox>

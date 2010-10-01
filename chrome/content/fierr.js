@@ -3,6 +3,9 @@ if (!com.RealityRipple) com.RealityRipple = {};
 com.RealityRipple.Fierr = function()
 {
  var pub = {};
+ var priv = {};
+
+ priv.sURL = '';
 
  pub.Listen = function()
  {
@@ -12,13 +15,19 @@ com.RealityRipple.Fierr = function()
 
  pub.URL = function(winLoc)
  {
-  if (winLoc == "http://go.online/")
+  if (winLoc.substr(0,17) == "http://go.online/" && com.RealityRipple.Fierr.BoolPref('browser.offline',true))
   {
-   if(com.RealityRipple.Fierr.BoolPref('browser.offline',true))
-   {
-    BrowserOffline.toggleOfflineStatus();
-   }
+   BrowserOffline.toggleOfflineStatus();
+   if (priv.sURL == decodeURIComponent(winLoc.substr(17)))
+    return;
+   priv.sURL = decodeURIComponent(winLoc.substr(17));
+   setTimeout(com.RealityRipple.Fierr.goTo, 500);
   }
+ }
+
+ pub.goTo = function()
+ {
+  window.content.location.href = priv.sURL;
  }
 
  pub.Listener =

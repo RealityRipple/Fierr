@@ -10,3 +10,5 @@
 <!ENTITY malwareBlocked.longDesc "">
 <!ENTITY securityOverride.linkText "">
 <!ENTITY securityOverride.warningText "">
+<!ENTITY netOffline.overrideLongDesc "">
+<!ENTITY netOffline.longDesc "">

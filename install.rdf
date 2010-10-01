@@ -4,32 +4,34 @@
  <Description about="urn:mozilla:install-manifest">
   <em:name>Fierr</em:name>
   <em:id>{2E481B23-66AC-313F-D6A8-A81DDDF26249}</em:id>
-  <em:version>0.8.1</em:version>
+  <em:version>0.9.20101001.1</em:version>
   <em:type>2</em:type>
   <!-- Firefox -->
   <em:targetApplication>
    <Description>
     <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
     <em:minVersion>1.5</em:minVersion>
-    <em:maxVersion>3.7a1pre</em:maxVersion>
+    <em:maxVersion>4.0b8pre</em:maxVersion>
    </Description>
   </em:targetApplication>
   <em:description>Replaces the error page with a more stylish appearance with additional features.</em:description>
   <em:homepageURL>http://realityripple.com/software/xpi/fe</em:homepageURL>
   <em:iconURL>chrome://fierr/skin/logo.png</em:iconURL>
-  <em:creator>RealityRipple (realityripple.com)</em:creator>
+  <em:creator>RealityRipple</em:creator>
   <em:translator>BabelZilla.org - This community is awesome.</em:translator>
   <em:translator>Thank you to every active member, especially these guys:</em:translator>
-  <em:translator>[da-DK] Joergen</em:translator>
-  <em:translator>[de-DE] 57_homer</em:translator>
-  <em:translator>[es-ES] RigoNet</em:translator>
-  <em:translator>[fr] Goofy</em:translator>
-  <em:translator>[mk-MK] renegade06</em:translator>
-  <em:translator>[nl-NL] oeekker</em:translator>
-  <em:translator>[pl-PL] Leszek(teo)Życzkowski</em:translator>
-  <em:translator>[pt-BR] Marcelo Ghelman (ghelman.net)</em:translator>
-  <em:translator>[ru-RU] le_</em:translator>
-  <em:translator>[tr-TR] DepressiveGuN</em:translator>
-  <em:translator>[zh-CN] tawcw</em:translator>
+  <em:translator>[Danish] Joergen</em:translator>
+  <em:translator>[German] 57_homer</em:translator>
+  <em:translator>[Spanish (Spain)] RigoNet</em:translator>
+  <em:translator>[French] Goofy</em:translator>
+  <em:translator>[Macedonian] renegade06</em:translator>
+  <em:translator>[Dutch] oeekker</em:translator>
+  <em:translator>[Polish] Leszek(teo)Życzkowski</em:translator>
+  <em:translator>[Portugese (Brazilian)] Marcelo Ghelman (ghelman.net)</em:translator>
+  <em:translator>[Russian] le_</em:translator>
+  <em:translator>[Serbian] ДакСРБИЈА</em:translator>
+  <em:translator>[Swedish] Mikael Hiort af Ornäs</em:translator>
+  <em:translator>[Turkish] DepressiveGuN</em:translator>
+  <em:translator>[Chinese (Simplified)] tawcw</em:translator>
  </Description>
 </RDF>

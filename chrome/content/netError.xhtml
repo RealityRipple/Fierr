@@ -198,7 +198,7 @@ com.RealityRipple.Fierr = function()
   var cmdStop = document.getElementById("tryStop");
   if (cmdStop)
   {
-   clearTimeout(priv.TimerID)
+   clearTimeout(priv.TimerID);
    cmdStop.parentNode.removeChild(cmdStop);
    priv.Seconds = priv.DefaultTime;
   }

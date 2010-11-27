@@ -4,7 +4,7 @@
  <Description about="urn:mozilla:install-manifest">
   <em:name>Fierr</em:name>
   <em:id>{2E481B23-66AC-313F-D6A8-A81DDDF26249}</em:id>
-  <em:version>0.9.20101001.1</em:version>
+  <em:version>0.9.20101126</em:version>
   <em:type>2</em:type>
   <!-- Firefox -->
   <em:targetApplication>
@@ -12,6 +12,14 @@
     <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
     <em:minVersion>1.5</em:minVersion>
     <em:maxVersion>4.0b8pre</em:maxVersion>
+   </Description>
+  </em:targetApplication>
+  <!-- Fennec -->
+  <em:targetApplication>
+   <Description>
+    <em:id>{a23983c0-fd0e-11dc-95ff-0800200c9a66}</em:id>
+    <em:minVersion>2.0a1</em:minVersion>
+    <em:maxVersion>4.0b3pre</em:maxVersion>
    </Description>
   </em:targetApplication>
   <em:description>Replaces the error page with a more stylish appearance with additional features.</em:description>

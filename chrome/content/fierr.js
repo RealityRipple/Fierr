@@ -7,6 +7,9 @@ com.RealityRipple.Fierr = function()
 
  priv.sURL = '';
 
+ priv.timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
+ priv.TIMER_ONE_SHOT = Components.interfaces.nsITimer.TYPE_ONE_SHOT;
+
  pub.Listen = function()
  {
   window.removeEventListener('load',com.RealityRipple.Fierr.Listen, false);
@@ -21,13 +24,17 @@ com.RealityRipple.Fierr = function()
    if (priv.sURL == decodeURIComponent(winLoc.substr(17)))
     return;
    priv.sURL = decodeURIComponent(winLoc.substr(17));
-   setTimeout(com.RealityRipple.Fierr.goTo, 500);
+   priv.timer.init(com.RealityRipple.Fierr.event, 500, priv.TIMER_ONE_SHOT);  
   }
  }
 
- pub.goTo = function()
+ pub.event =
  {
-  window.content.location.href = priv.sURL;
+  observe: function(subject, topic, data)
+  {
+   window.content.location.href = priv.sURL;
+   priv.timer.cancel();
+  }
  }
 
  pub.Listener =

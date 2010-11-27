@@ -1,6 +1,8 @@
 content		fierr					chrome/content/
-override	chrome://global/content/netError.xhtml  chrome://fierr/content/netError.xhtml
-skin		fierr		skin			chrome/skin/
+override	chrome://global/content/netError.xhtml  chrome://fierr/content/netError.xhtml	application={ec8030f7-c20a-464f-9b0e-13a3a9e97384}
+override	chrome://global/content/netError.xhtml  chrome://fierr/content/fenError.xhtml	application={a23983c0-fd0e-11dc-95ff-0800200c9a66}
+skin		fierr		skin			chrome/skin/				application={ec8030f7-c20a-464f-9b0e-13a3a9e97384}
+skin		fierr		skin			chrome/fen-skin/			application={a23983c0-fd0e-11dc-95ff-0800200c9a66}
 locale 		fierr 		da			chrome/locale/da/
 locale 		fierr 		de			chrome/locale/de/
 locale 		fierr 		en-US			chrome/locale/en-US/
@@ -15,4 +17,4 @@ locale 		fierr 		sr			chrome/locale/sr/
 locale 		fierr 		sv-SE			chrome/locale/sv-SE/
 locale 		fierr 		tr			chrome/locale/tr/
 locale 		fierr 		zh-CN			chrome/locale/zh-CN/
-overlay		chrome://browser/content/browser.xul	chrome://fierr/content/fierr.xul
+overlay		chrome://browser/content/browser.xul	chrome://fierr/content/fierr.xul	application={ec8030f7-c20a-464f-9b0e-13a3a9e97384}

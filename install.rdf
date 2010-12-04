@@ -4,7 +4,7 @@
  <Description about="urn:mozilla:install-manifest">
   <em:name>Fierr</em:name>
   <em:id>{2E481B23-66AC-313F-D6A8-A81DDDF26249}</em:id>
-  <em:version>0.9.20101126</em:version>
+  <em:version>1.0.20101204</em:version>
   <em:type>2</em:type>
   <!-- Firefox -->
   <em:targetApplication>
@@ -19,12 +19,21 @@
    <Description>
     <em:id>{a23983c0-fd0e-11dc-95ff-0800200c9a66}</em:id>
     <em:minVersion>2.0a1</em:minVersion>
-    <em:maxVersion>4.0b3pre</em:maxVersion>
+    <em:maxVersion>4.0b3</em:maxVersion>
+   </Description>
+  </em:targetApplication>
+  <!-- SeaMonkey -->
+  <em:targetApplication>
+   <Description>
+    <em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
+    <em:minVersion>2.0a1</em:minVersion>
+    <em:maxVersion>2.1b2</em:maxVersion>
    </Description>
   </em:targetApplication>
   <em:description>Replaces the error page with a more stylish appearance with additional features.</em:description>
   <em:homepageURL>http://realityripple.com/software/xpi/fe</em:homepageURL>
   <em:iconURL>chrome://fierr/skin/logo.png</em:iconURL>
+  <em:icon64URL>chrome://fierr/skin/logo64.png</em:icon64URL>
   <em:creator>RealityRipple</em:creator>
   <em:translator>BabelZilla.org - This community is awesome.</em:translator>
   <em:translator>Thank you to every active member, especially these guys:</em:translator>
@@ -36,10 +45,12 @@
   <em:translator>[Dutch] oeekker</em:translator>
   <em:translator>[Polish] Leszek(teo)Życzkowski</em:translator>
   <em:translator>[Portugese (Brazilian)] Marcelo Ghelman (ghelman.net)</em:translator>
+  <em:translator>[Portugese (Portugal)] ricardosimoes</em:translator>
   <em:translator>[Russian] le_</em:translator>
   <em:translator>[Serbian] ДакСРБИЈА</em:translator>
   <em:translator>[Swedish] Mikael Hiort af Ornäs</em:translator>
   <em:translator>[Turkish] DepressiveGuN</em:translator>
+  <em:translator>[Ukrainian] Володимир Савчук (Volodymyr Savchuk)</em:translator>
   <em:translator>[Chinese (Simplified)] tawcw</em:translator>
  </Description>
 </RDF>

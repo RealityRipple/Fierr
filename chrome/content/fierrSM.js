@@ -18,13 +18,13 @@ com.RealityRipple.Fierr = function()
 
  pub.URL = function(winLoc)
  {
-  if (winLoc.substr(0,17) == "http://go.online/" && com.RealityRipple.Fierr.BoolPref('browser.offline',true))
+  if (winLoc.substr(0,17) == "http://go.online/" && !(com.RealityRipple.Fierr.BoolPref('network.online', false)))
   {
-   BrowserOffline.toggleOfflineStatus();
    if (priv.sURL == decodeURIComponent(winLoc.substr(17)))
     return;
+   toggleOfflineStatus();
    priv.sURL = decodeURIComponent(winLoc.substr(17));
-   priv.timer.init(com.RealityRipple.Fierr.event, 500, priv.TIMER_ONE_SHOT);  
+   priv.timer.init(com.RealityRipple.Fierr.event, 500, priv.TIMER_ONE_SHOT);
   }
  }
 
@@ -33,6 +33,7 @@ com.RealityRipple.Fierr = function()
   observe: function(subject, topic, data)
   {
    window.content.location.href = priv.sURL;
+   priv.sURL = '';
    priv.timer.cancel();
   }
  }

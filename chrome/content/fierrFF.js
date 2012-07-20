@@ -18,7 +18,7 @@ com.RealityRipple.Fierr = function()
 
  pub.URL = function(winLoc)
  {
-  if (winLoc.substr(0,17) == "http://go.online/" && com.RealityRipple.Fierr.BoolPref('browser.offline',true))
+  if (winLoc.substr(0,17) == "http://go.online/")
   {
    if (priv.sURL == decodeURIComponent(winLoc.substr(17)))
     return;

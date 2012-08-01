@@ -1,3 +1,6 @@
+<!ENTITY errBack.label "Terug">
+<!ENTITY errReload.label "Vernieuwen">
+<!ENTITY errSearch.label "Zoeken">
 <!ENTITY errGoOnline.label "Ga online">
 <!ENTITY errStopReload.label "Stop vernieuwen">
 <!ENTITY errReloading.label "Vernieuwen...">

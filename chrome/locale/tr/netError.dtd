@@ -1,3 +1,6 @@
+﻿<!ENTITY errBack.label "Geri">
+<!ENTITY errReload.label "Güncelle">
+<!ENTITY errSearch.label "Aramak">
 <!ENTITY errGoOnline.label "Online Ol">
 <!ENTITY errStopReload.label "Yeniden Yüklemeyi Durdur">
 <!ENTITY errReloading.label "Yeniden Yükleniyor...">

@@ -1,3 +1,6 @@
+<!ENTITY errBack.label "Voltar">
+<!ENTITY errReload.label "Recarregar">
+<!ENTITY errSearch.label "Procurar">
 <!ENTITY errGoOnline.label "Mudar para modo online">
 <!ENTITY errStopReload.label "Parar atualização">
-<!ENTITY errReloading.label "Atualizando...">
+<!ENTITY errReloading.label "Atualizando…">

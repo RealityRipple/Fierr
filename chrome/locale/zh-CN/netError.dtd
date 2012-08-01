@@ -1,3 +1,6 @@
+<!ENTITY errBack.label "后退">
+<!ENTITY errReload.label "重新载入">
+<!ENTITY errSearch.label "搜索">
 <!ENTITY errGoOnline.label "联机">
-<!ENTITY errStopReload.label "停止刷新">
-<!ENTITY errReloading.label "重新加载...">
+<!ENTITY errStopReload.label "停止重新载入">
+<!ENTITY errReloading.label "重新载入...">

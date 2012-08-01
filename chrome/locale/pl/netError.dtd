@@ -1,3 +1,6 @@
+<!ENTITY errBack.label "Wróć">
+<!ENTITY errReload.label "Odśwież">
+<!ENTITY errSearch.label "Szukaj">
 <!ENTITY errGoOnline.label "Przejdź do trybu online">
 <!ENTITY errStopReload.label "Zatrzymaj odświeżanie">
 <!ENTITY errReloading.label "Odświeżanie…">

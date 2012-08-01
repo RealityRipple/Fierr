@@ -1,3 +1,6 @@
+﻿<!ENTITY errBack.label "отступать">
+<!ENTITY errReload.label "перезагружать">
+<!ENTITY errSearch.label "искать">
 <!ENTITY errGoOnline.label "Перейти Online">
 <!ENTITY errStopReload.label "Стоп">
 <!ENTITY errReloading.label "Загрузка...">

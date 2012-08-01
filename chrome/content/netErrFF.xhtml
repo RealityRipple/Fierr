@@ -8,8 +8,6 @@
   %ff2DummyDTD;
   <!ENTITY % globalDTD SYSTEM "chrome://global/locale/global.dtd">
   %globalDTD;
-  <!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd">
-  %browserDTD;
   <!ENTITY % localeDTD SYSTEM "chrome://fierr/locale/netError.dtd">
   %localeDTD;
 ]>
@@ -410,10 +408,10 @@ com.RealityRipple.Fierr = function()
    <table style="width: 100%;">
     <tr>
      <td style="width: 80px;"></td>
-     <td style="width: 18%;"><button type="button" id="tryBack"   onclick="com.RealityRipple.Fierr.backPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFZXQtAAAA/wAA/4BA//8Ak+ONhwAAAAF0Uk5TAEDm2GYAAABFSURBVAjXY2BAAoICEJrRBcoQMYIwGJ0VoQLGgkAgABQwdgECAaAACACVMSobKwEBUL0QVA1QCKqLQcgIZrKSAJpdaAAANjcHLsiQauYAAAAASUVORK5CYII=" alt="" title="&backCmd.label;" />&backCmd.label;</button></td>
-     <td style="width: 18%;"><button type="button" id="tryAgain"  onclick="com.RealityRipple.Fierr.reloadPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFZXQtAAAA/wAA/4BA//8Ak+ONhwAAAAF0Uk5TAEDm2GYAAABaSURBVAjXRYzREcAgCEPDBuC5QHED6QIq+89UwI/mh0cuCQARYeK47r46g9zM3h1wTIdNRrcp7cKTT8Bk2qoXciABpcyEhWp1XwAN8xMu0GK5cqSqT8Wr/OsDE0EMo1NBqlcAAAAASUVORK5CYII=" alt="" title="&reloadCmd.label;" />&reloadCmd.label;</button></td>
+     <td style="width: 18%;"><button type="button" id="tryBack"   onclick="com.RealityRipple.Fierr.backPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFZXQtAAAA/wAA/4BA//8Ak+ONhwAAAAF0Uk5TAEDm2GYAAABFSURBVAjXY2BAAoICEJrRBcoQMYIwGJ0VoQLGgkAgABQwdgECAaAACACVMSobKwEBUL0QVA1QCKqLQcgIZrKSAJpdaAAANjcHLsiQauYAAAAASUVORK5CYII=" alt="" title="&errBack.label;" />&errBack.label;</button></td>
+     <td style="width: 18%;"><button type="button" id="tryAgain"  onclick="com.RealityRipple.Fierr.reloadPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFZXQtAAAA/wAA/4BA//8Ak+ONhwAAAAF0Uk5TAEDm2GYAAABaSURBVAjXRYzREcAgCEPDBuC5QHED6QIq+89UwI/mh0cuCQARYeK47r46g9zM3h1wTIdNRrcp7cKTT8Bk2qoXciABpcyEhWp1XwAN8xMu0GK5cqSqT8Wr/OsDE0EMo1NBqlcAAAAASUVORK5CYII=" alt="" title="&errReload.label;" />&errReload.label;</button></td>
      <td style="width: 18%;">
-      <button type="button" id="tryGoogle" onclick="com.RealityRipple.Fierr.googlePage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAABJQTFRFY29sAAAA/wAA/4BA//8A////gBrx2wAAAAF0Uk5TAEDm2GYAAABOSURBVAjXTYzBEYAwCATvZpI/qBVoCxYAHdh/NSGEUfe1szAHQAWJmqex98aUx8ynHC2YN4li8i+0+mEESu3svhZlu2uc10rAl84SKF4GPqkG+lDKRbcAAAAASUVORK5CYII=" alt="" title="&searchItem.title;" />&searchItem.title;</button>
+      <button type="button" id="tryGoogle" onclick="com.RealityRipple.Fierr.googlePage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAABJQTFRFY29sAAAA/wAA/4BA//8A////gBrx2wAAAAF0Uk5TAEDm2GYAAABOSURBVAjXTYzBEYAwCATvZpI/qBVoCxYAHdh/NSGEUfe1szAHQAWJmqex98aUx8ynHC2YN4li8i+0+mEESu3svhZlu2uc10rAl84SKF4GPqkG+lDKRbcAAAAASUVORK5CYII=" alt="" title="&errSearch.label;" />&errSearch.label;</button>
       <button type="button" id="tryOn"     onclick="com.RealityRipple.Fierr.goOnline();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFZXQtAAAA/wAA/4BA//8Ak+ONhwAAAAF0Uk5TAEDm2GYAAABOSURBVAjXdczRDYAwCARQukExLlC8CXpdoJH9ZxL4M9H74YXAiXxFtddsjl04idVzfxPcKu4MLBcyQYpZYlrcXIGh8XUQs4qaYbyb//IA9PAJrjDsGfkAAAAASUVORK5CYII=" alt="" title="&errGoOnline.label;" />&errGoOnline.label;</button>
      </td>
      <td style="width: 35%;"><button type="button" id="tryStop"   onclick="com.RealityRipple.Fierr.stopReload();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFZXQtAAAA/wAA/4BA//8Ak+ONhwAAAAF0Uk5TAEDm2GYAAABVSURBVAjXNY7BDcAwCAPxBnXKAskGyBNEYv+ZWkjL6zgZGTMDaT3IfcD8OgJO9O6Z5ZBJz1mGEaNSfocKsBWKWfAaNkht3ox0wv8VFsfsjrHWV9ZvPKH6Cb7nzCSUAAAAAElFTkSuQmCC" alt="" title="&errStopReload.label;" /><span id="lblStop">&errStopReload.label;</span></button></td>

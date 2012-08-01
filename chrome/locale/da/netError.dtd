@@ -1,3 +1,6 @@
+<!ENTITY errBack.label "Tilbage">
+<!ENTITY errReload.label "Genindlæs">
+<!ENTITY errSearch.label "Søg">
 <!ENTITY errGoOnline.label "Gå online">
 <!ENTITY errStopReload.label "Stop genindlæsning">
 <!ENTITY errReloading.label "Genindlæser...">

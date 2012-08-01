@@ -1,3 +1,6 @@
+<!ENTITY errBack.label "Назад">
+<!ENTITY errReload.label "Освежи">
+<!ENTITY errSearch.label "Тражи">
 <!ENTITY errGoOnline.label "Иди на мрежу">
 <!ENTITY errStopReload.label "Заустави освежавање">
 <!ENTITY errReloading.label "Освежавање...">

@@ -1,3 +1,6 @@
+<!ENTITY errBack.label "Atrás">
+<!ENTITY errReload.label "Recargar">
+<!ENTITY errSearch.label "Buscar">
 <!ENTITY errGoOnline.label "Ir En Linea">
 <!ENTITY errStopReload.label "Parar recarga">
 <!ENTITY errReloading.label "Recargando...">

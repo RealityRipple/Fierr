@@ -13,7 +13,7 @@ com.RealityRipple.Fierr = function()
  pub.Listen = function()
  {
   window.removeEventListener('load',com.RealityRipple.Fierr.Listen, false);
-  gBrowser.addProgressListener(com.RealityRipple.Fierr.Listener, Components.interfaces.nsIWebProgress.NOTIFY_STATE_REQUEST);
+  gBrowser.addProgressListener(com.RealityRipple.Fierr.Listener);
  }
 
  pub.URL = function(winLoc)

@@ -200,10 +200,12 @@ com.RealityRipple.Fierr = function()
  }
  pub.backPage = function()
  {
+  com.RealityRipple.Fierr.stopReload();
   history.back();
  }
  pub.googlePage = function()
  {
+  com.RealityRipple.Fierr.stopReload();
   window.content.location.href = "http://www.google.com/search?q="+priv.getOriginalPage(false)+"&rls=org.mozilla:en-US:official&client=firefox-a";
  }
  priv.getDescription = function()
@@ -306,12 +308,13 @@ com.RealityRipple.Fierr = function()
   if (priv.Seconds == 0)
   {
    lblStop.textContent = priv.errReloading;
-   cmdStop.disabled = true;	
+   cmdStop.disabled = true;
    priv.Seconds = priv.DefaultTime;
    com.RealityRipple.Fierr.reloadPage();
   }
   else
   {
+   cmdStop.disabled = false;
    lblStop.textContent = priv.errStopReload + " (" + priv.Seconds + ")";
    priv.TimerID = setTimeout(com.RealityRipple.Fierr.UpdateTimer, 1000);
   }

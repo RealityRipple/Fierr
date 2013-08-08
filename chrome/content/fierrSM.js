@@ -60,25 +60,6 @@ com.RealityRipple.Fierr = function()
   onLinkIconAvailable: function() {}
  };
 
- pub.BoolPref = function(prefName, defval)
- {
-  var result = defval;
-  var prefservice = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
-  var prefs = prefservice.getBranch("");
-  if (prefs.getPrefType(prefName) == prefs.PREF_BOOL)
-  {
-   try
-   {
-    result = prefs.getBoolPref(prefName);
-   }
-   catch(e)
-   {
-    result = defval;
-   }
-  }
-  return(result);
- }
-
  return pub;
 }();
 

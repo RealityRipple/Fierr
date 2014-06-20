@@ -3,14 +3,14 @@
  <Description about="urn:mozilla:install-manifest">
   <em:name>Fierr</em:name>
   <em:id>{2E481B23-66AC-313F-D6A8-A81DDDF26249}</em:id>
-  <em:version>1.3.20130808</em:version>
+  <em:version>1.4</em:version>
   <em:type>2</em:type>
   <!-- Firefox -->
   <em:targetApplication>
    <Description>
     <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
     <em:minVersion>1.5</em:minVersion>
-    <em:maxVersion>26.0</em:maxVersion>
+    <em:maxVersion>33.0</em:maxVersion>
    </Description>
   </em:targetApplication>
   <!-- Fennec -->
@@ -18,7 +18,7 @@
    <Description>
     <em:id>{a23983c0-fd0e-11dc-95ff-0800200c9a66}</em:id>
     <em:minVersion>2.0a1</em:minVersion>
-    <em:maxVersion>26.0</em:maxVersion>
+    <em:maxVersion>33.0</em:maxVersion>
    </Description>
   </em:targetApplication>
   <!-- Android -->
@@ -26,7 +26,7 @@
    <Description>
     <em:id>{aa3c5121-dab2-40e2-81ca-7ea25febc110}</em:id>
     <em:minVersion>10.0a1</em:minVersion>
-    <em:maxVersion>26.0</em:maxVersion>
+    <em:maxVersion>33.0</em:maxVersion>
    </Description>
   </em:targetApplication>
   <!-- SeaMonkey -->
@@ -34,11 +34,11 @@
    <Description>
     <em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
     <em:minVersion>2.0a1</em:minVersion>
-    <em:maxVersion>2.23</em:maxVersion>
+    <em:maxVersion>2.30</em:maxVersion>
    </Description>
   </em:targetApplication>
   <em:description>Replaces the error page with a more stylish appearance with additional features.</em:description>
-  <em:homepageURL>http://realityripple.com/software/xpi/fe</em:homepageURL>
+  <em:homepageURL>http://realityripple.com/Software/Mozilla_Extensions/Fierr/</em:homepageURL>
   <em:iconURL>chrome://fierr/skin/logo.png</em:iconURL>
   <em:icon64URL>chrome://fierr/skin/logo64.png</em:icon64URL>
   <em:creator>RealityRipple</em:creator>

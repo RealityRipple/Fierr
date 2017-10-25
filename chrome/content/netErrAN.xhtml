@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- This code is in the public domain. No ownership is implied. -->
 <!DOCTYPE html [
   <!ENTITY % htmlDTD PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
   %htmlDTD;
@@ -281,7 +280,7 @@ com.RealityRipple.Fierr = function()
  {
   var sd = document.getElementById("errorShortDescText");
   if (sd)
-   sd.innerHTML = priv.getDescription();
+   sd.textContent = priv.getDescription();
   var link = document.getElementById('cert_domain_link');
   if (!link)
    return;

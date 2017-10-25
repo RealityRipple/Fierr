@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<!-- This code is in the public domain. No ownership is implied. -->
 <overlay id="fierrOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
  <script type="application/x-javascript" src="chrome://fierr/content/fierrSM.js"/>

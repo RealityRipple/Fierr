@@ -3,7 +3,7 @@
  <Description about="urn:mozilla:install-manifest">
   <em:name>Fierr</em:name>
   <em:id>{2E481B23-66AC-313F-D6A8-A81DDDF26249}</em:id>
-  <em:version>1.6.1</em:version>
+  <em:version>1.6.2</em:version>
   <em:type>2</em:type>
   <!-- Firefox -->
   <em:targetApplication>
@@ -27,6 +27,14 @@
     <em:id>{aa3c5121-dab2-40e2-81ca-7ea25febc110}</em:id>
     <em:minVersion>10.0a1</em:minVersion>
     <em:maxVersion>56.*</em:maxVersion>
+   </Description>
+  </em:targetApplication>
+  <!-- AdBlock -->
+  <em:targetApplication>
+   <Description>
+    <em:id>{55aba3ac-94d3-41a8-9e25-5c21fe874539}</em:id>
+    <em:minVersion>1.0</em:minVersion>
+    <em:maxVersion>1.0</em:maxVersion>
    </Description>
   </em:targetApplication>
   <!-- SeaMonkey -->

@@ -2,8 +2,8 @@
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
  <Description about="urn:mozilla:install-manifest">
   <em:name>Fierr</em:name>
-  <em:id>{2E481B23-66AC-313F-D6A8-A81DDDF26249}</em:id>
-  <em:version>1.6.2</em:version>
+  <em:id>{AF1AD85E-20B4-517C-9A93-B3E51B6EB86F}</em:id>
+  <em:version>2.0</em:version>
   <em:type>2</em:type>
   <!-- Firefox -->
   <em:targetApplication>

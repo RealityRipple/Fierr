@@ -1,0 +1,6 @@
+<!ENTITY errBack.label "Atgal">
+<!ENTITY errReload.label "Perkrauti">
+<!ENTITY errSearch.label "Ieškoti">
+<!ENTITY errGoOnline.label "Jungtis">
+<!ENTITY errStopReload.label "Stabdyti perkrovimą">
+<!ENTITY errReloading.label "Perkrovimas..">

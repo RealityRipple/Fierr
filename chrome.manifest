@@ -19,6 +19,8 @@ locale 		fierr 		de				chrome/locale/de/
 locale 		fierr 		en-US				chrome/locale/en-US/
 locale 		fierr 		es-ES				chrome/locale/es-ES/
 locale 		fierr 		fr				chrome/locale/fr/
+locale 		fierr 		lt				chrome/locale/lt/
+locale 		fierr 		lt-LT				chrome/locale/lt-LT/
 locale 		fierr 		mk				chrome/locale/mk/
 locale 		fierr 		nl				chrome/locale/nl/
 locale 		fierr 		pl				chrome/locale/pl/

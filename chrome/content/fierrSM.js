@@ -12,8 +12,8 @@ com.RealityRipple.Fierr = function()
 
  pub.Listen = function()
  {
-  window.removeEventListener('load',com.RealityRipple.Fierr.Listen, false);
-  gBrowser.addProgressListener(com.RealityRipple.Fierr.Listener);
+  window.removeEventListener('load',pub.Listen, false);
+  gBrowser.addProgressListener(pub.Listener);
  }
 
  pub.URL = function(winLoc)
@@ -24,7 +24,7 @@ com.RealityRipple.Fierr = function()
     return;
    toggleOfflineStatus();
    priv.sURL = decodeURIComponent(winLoc.substr(17));
-   priv.timer.init(com.RealityRipple.Fierr.event, 500, priv.TIMER_ONE_SHOT);
+   priv.timer.init(pub.event, 500, priv.TIMER_ONE_SHOT);
   }
  }
 
@@ -51,7 +51,7 @@ com.RealityRipple.Fierr = function()
   onLocationChange: function(aProgress, aRequest, aURI)
   {
    if (aURI != null)
-    com.RealityRipple.Fierr.URL(aURI.spec);
+    pub.URL(aURI.spec);
   },
   onStateChange: function() {},
   onProgressChange: function() {},

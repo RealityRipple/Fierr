@@ -3,7 +3,7 @@
  <Description about="urn:mozilla:install-manifest">
   <em:name>Fierr</em:name>
   <em:id>{AF1AD85E-20B4-517C-9A93-B3E51B6EB86F}</em:id>
-  <em:version>2.0</em:version>
+  <em:version>2.1</em:version>
   <em:type>2</em:type>
   <!-- Firefox -->
   <em:targetApplication>
@@ -50,7 +50,7 @@
    <Description>
     <em:id>{8de7fcbb-c55c-4fbe-bfc5-fc555c87dbc4}</em:id>
     <em:minVersion>25.0a1pre</em:minVersion>
-    <em:maxVersion>27.*</em:maxVersion>
+    <em:maxVersion>28.*</em:maxVersion>
    </Description>
   </em:targetApplication>
   <em:description>Replaces the error page with a more stylish appearance with additional features.</em:description>

@@ -138,38 +138,29 @@ button img
    errStopReload: "&errStopReload.label;",
    errReloading:  "&errReloading.label;"
   }<![CDATA[
-if (!com) var com = {};
-if (!com.RealityRipple) com.RealityRipple = {};
-
-com.RealityRipple.Fierr = function()
+var Fierr_PageScript =
 {
- var pub  = {};
- var priv = {};
-
- priv.DefaultTime = 10;
-
- priv.TimerID  = 0;
- priv.Seconds  = priv.DefaultTime;
-
- priv.errStopReload = localeFierr.errStopReload;
- priv.errReloading = localeFierr.errReloading;
-
- priv.getErrorCode = function()
+ _DefaultTime: 10,
+ _TimerID: 0,
+ _Seconds: 0,
+ _errStopReload: localeFierr.errStopReload,
+ _errReloading: localeFierr.errReloading,
+ _getErrorCode: function()
  {
   var url = document.documentURI;
   var error = url.search(/e\=/);
   var duffUrl = url.search(/\&u\=/);
   return decodeURIComponent(url.slice(error + 2, duffUrl));
- }
- priv.getCSSClass = function()
+ },
+ _getCSSClass: function()
  {
   var url = document.documentURI;
   var matches = url.match(/s\=([^&]+)\&/);
   if (!matches || matches.length < 2)
    return "";
   return decodeURIComponent(matches[1]);
- }
- priv.getOriginalPage = function(noEnd)
+ },
+ _getOriginalPage: function(noEnd)
  {
   var location = window.content.location.href;
   if (noEnd==true)
@@ -181,10 +172,10 @@ com.RealityRipple.Fierr = function()
   {
    return location;
   }
- }
- pub.reloadPage = function()
+ },
+ reloadPage: function()
  {
-  com.RealityRipple.Fierr.stopReload();
+  Fierr_PageScript.stopReload();
   try
   {
    location.reload();
@@ -192,42 +183,43 @@ com.RealityRipple.Fierr = function()
   catch (e)
   {
   }
- }
- pub.stopReload = function()
+ },
+ stopReload: function()
  {
   var cmdStop = document.getElementById("tryStop");
   if (cmdStop)
   {
-   clearTimeout(priv.TimerID)
+   clearTimeout(Fierr_PageScript._TimerID);
    cmdStop.parentNode.removeChild(cmdStop);
-   priv.Seconds = priv.DefaultTime;
+   Fierr_PageScript._Seconds = Fierr_PageScript._DefaultTime;
   }
- }
- pub.backPage = function()
+ },
+ backPage: function()
  {
-  com.RealityRipple.Fierr.stopReload();
+  Fierr_PageScript.stopReload();
   history.back();
- }
- pub.googlePage = function()
+ },
+ googlePage: function()
  {
-  com.RealityRipple.Fierr.stopReload();
-  window.content.location.href = "http://www.google.com/search?q="+priv.getOriginalPage(false)+"&rls=org.mozilla:en-US:official&client=firefox-a";
- }
- pub.goOnline = function()
+  Fierr_PageScript.stopReload();
+  window.content.location.href = "http://www.google.com/search?q=" + Fierr_PageScript._getOriginalPage(false);
+ },
+ goOnline: function()
  {
   var sTemp = window.content.location.href;
   window.content.location.href = "http://go.online/" + encodeURIComponent(sTemp);
- }
- priv.getDescription = function()
+ },
+ _getDescription: function()
  {
   var url = document.documentURI;
   var desc = url.search(/d\=/);
-  if (desc == -1) return "";
+  if (desc == -1)
+   return "";
   return decodeURIComponent(url.slice(desc + 2));
- }
- pub.initPage = function()
+ },
+ initPage: function()
  {
-  var err = priv.getErrorCode();
+  var err = Fierr_PageScript._getErrorCode();
   var errTitle = document.getElementById("et_" + err);
   var errDesc  = document.getElementById("ed_" + err);
   if (!errTitle || !errDesc)
@@ -243,7 +235,7 @@ com.RealityRipple.Fierr = function()
   }
   var sd = document.getElementById("errorShortDescText");
   if (sd)
-   sd.textContent = priv.getDescription();
+   sd.textContent = Fierr_PageScript._getDescription();
   var ld = document.getElementById("errorLongDesc");
   if (ld)
   {
@@ -254,7 +246,7 @@ com.RealityRipple.Fierr = function()
   {
    var cmdOnline = document.getElementById("tryOn");
    cmdOnline.parentNode.removeChild(cmdOnline);
-   priv.Seconds = priv.DefaultTime;
+   Fierr_PageScript._Seconds = Fierr_PageScript._DefaultTime;
   }
   else
   {
@@ -268,8 +260,8 @@ com.RealityRipple.Fierr = function()
      err == "proxyResolveFailure" || err == "proxyConnectFailure" ||
      err == "dnsNotFound")
   {
-   lblStop.textContent = priv.errStopReload + " (" + priv.Seconds + ")";
-   priv.TimerID = setTimeout(com.RealityRipple.Fierr.UpdateTimer, 1000);
+   lblStop.textContent = Fierr_PageScript._errStopReload + " (" + Fierr_PageScript._Seconds + ")";
+   Fierr_PageScript._TimerID = setTimeout(Fierr_PageScript.UpdateTimer, 1000);
   }
   else
   {
@@ -277,28 +269,28 @@ com.RealityRipple.Fierr = function()
   }
   var errContainer = document.getElementById("errorContainer");
   errContainer.parentNode.removeChild(errContainer);
-  var className = priv.getCSSClass();
+  var className = Fierr_PageScript._getCSSClass();
   if (className == "expertBadCert")
   {
-   com.RealityRipple.Fierr.showSecuritySection();
+   Fierr_PageScript.showSecuritySection();
   }
   if (err == "nssBadCert")
   {
    document.getElementById("tryAgain").style.display = "none";
    document.getElementById("errorPageContainer").setAttribute("class", "certerror");
-   priv.addDomainErrorLink();
+   Fierr_PageScript._addDomainErrorLink();
   }
   else
   {
    var secOverride = document.getElementById("securityOverrideDiv");
    secOverride.parentNode.removeChild(secOverride);
   }
- }
- priv.addDomainErrorLink = function()
+ },
+ _addDomainErrorLink: function()
  {
   var sd = document.getElementById("errorShortDescText");
   if (sd)
-   sd.textContent = priv.getDescription();
+   sd.textContent = Fierr_PageScript._getDescription();
   var link = document.getElementById('cert_domain_link');
   if (!link)
    return;
@@ -306,46 +298,45 @@ com.RealityRipple.Fierr = function()
   var thisHost = document.location.hostname;
   var proto = document.location.protocol;
   okHost = okHost.replace(/^\*\./, "www.");
-  if (priv.endsWith(okHost, "." + thisHost))
+  if (Fierr_PageScript._endsWith(okHost, "." + thisHost))
    link.href = proto + okHost;
-  if (priv.endsWith(thisHost, "." + okHost))
+  if (Fierr_PageScript._endsWith(thisHost, "." + okHost))
    link.href = proto + okHost;
- }
- priv.endsWith = function(haystack, needle)
+ },
+ _endsWith: function(haystack, needle)
  {
   return haystack.slice(-needle.length) == needle;
- }
- pub.UpdateTimer = function()
+ },
+ UpdateTimer: function()
  {
-  if (priv.TimerID) 
+  if (Fierr_PageScript._TimerID) 
   { 
-   clearTimeout(priv.TimerID); 
-   priv.TimerID = 0; 
+   clearTimeout(Fierr_PageScript._TimerID); 
+   Fierr_PageScript._TimerID = 0; 
   }
-  priv.Seconds--;
+  Fierr_PageScript._Seconds--;
   var cmdStop = document.getElementById("tryStop");
   var lblStop = document.getElementById("lblStop");
-  if (priv.Seconds == 0)
+  if (Fierr_PageScript._Seconds == 0)
   {
-   lblStop.textContent = priv.errReloading;
+   lblStop.textContent = Fierr_PageScript._errReloading;
    cmdStop.disabled = true;
-   priv.Seconds = priv.DefaultTime;
-   com.RealityRipple.Fierr.reloadPage();
+   Fierr_PageScript._Seconds = Fierr_PageScript._DefaultTime;
+   Fierr_PageScript.reloadPage();
   }
   else
   {
    cmdStop.disabled = false;
-   lblStop.textContent = priv.errStopReload + " (" + priv.Seconds + ")";
-   priv.TimerID = setTimeout(com.RealityRipple.Fierr.UpdateTimer, 1000);
+   lblStop.textContent = Fierr_PageScript._errStopReload + " (" + Fierr_PageScript._Seconds + ")";
+   Fierr_PageScript._TimerID = setTimeout(Fierr_PageScript.UpdateTimer, 1000);
   }
- }
- pub.showSecuritySection = function()
+ },
+ showSecuritySection: function()
  {
   document.getElementById('securityOverrideContent').style.display = '';
   document.getElementById('securityOverrideLink').style.display = 'none';
  }
- return pub;
-}();
+};
  ]]></script>
  </head>
  <body dir="&locale.dir;" style="overflow: hidden;">
@@ -415,7 +406,7 @@ com.RealityRipple.Fierr = function()
     </div>
     <div id="errorLongDesc" />
     <div id="securityOverrideDiv">
-     <a id="securityOverrideLink" href="javascript:com.RealityRipple.Fierr.showSecuritySection();">&securityOverride.linkText;</a>
+     <a id="securityOverrideLink" href="javascript:Fierr_PageScript.showSecuritySection();">&securityOverride.linkText;</a>
      <div id="securityOverrideContent" style="display: none;">&securityOverride.warningText;</div>
      <br />
     </div>
@@ -423,16 +414,16 @@ com.RealityRipple.Fierr = function()
    <table style="width: 100%;">
     <tr>
      <td style="width: 80px;"></td>
-     <td style="width: 18%;"><button type="button" id="tryBack"   onclick="com.RealityRipple.Fierr.backPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oMBAoiBnaliXwAAACcSURBVDjLpVPBDcQgDLMR62SsbMAA7b8bMFYHyj2uRUChUBEJCSmx4zhADYKV8L1EPE677xqEvTrXBZsBZkMFrgveARDfCArwBgB8lV94UICB1D73og4NQt8GYzw/mdo8waPIxvMahJE0wK5EXjRp4t8oViAOTmWiBmE8aNhuJTa1BVe7mpRcJG9baD6k9jgfCAqSiafI1d/osBg/2cJFkAijB4EAAAAASUVORK5CYII=" alt="" title="&errBack.label;" />&errBack.label;</button></td>
-     <td style="width: 18%;"><button type="button" id="tryAgain"  onclick="com.RealityRipple.Fierr.reloadPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oMBAoiKzN61QkAAAC1SURBVDjLlVPbDQMhDLMR6zAWGzAA938b3FgdKP1oeSZBbaRICGKDHcJcEuZ47pfAiVwS55pcEqMCiovHQ44aEgAQO7gBL/jRaji24lIwg6uxNshDv12BObL6jwpq5wvOJbGZBt+WTcIEXrzhrwRWkMfjI0GXcOIHsJq4yfA+VzuPpolV8NwU1X9DVsglEaTuu8jICyM3UWyz8HmmHHtuyeM8TJ3kYNlubNDGEF5aXeE+zv/GG06/VaiXFafaAAAAAElFTkSuQmCC" alt="" title="&errReload.label;" />&errReload.label;</button></td>
+     <td style="width: 18%;"><button type="button" id="tryBack"   onclick="Fierr_PageScript.backPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oMBAoiBnaliXwAAACcSURBVDjLpVPBDcQgDLMR62SsbMAA7b8bMFYHyj2uRUChUBEJCSmx4zhADYKV8L1EPE677xqEvTrXBZsBZkMFrgveARDfCArwBgB8lV94UICB1D73og4NQt8GYzw/mdo8waPIxvMahJE0wK5EXjRp4t8oViAOTmWiBmE8aNhuJTa1BVe7mpRcJG9baD6k9jgfCAqSiafI1d/osBg/2cJFkAijB4EAAAAASUVORK5CYII=" alt="" title="&errBack.label;" />&errBack.label;</button></td>
+     <td style="width: 18%;"><button type="button" id="tryAgain"  onclick="Fierr_PageScript.reloadPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oMBAoiKzN61QkAAAC1SURBVDjLlVPbDQMhDLMR6zAWGzAA938b3FgdKP1oeSZBbaRICGKDHcJcEuZ47pfAiVwS55pcEqMCiovHQ44aEgAQO7gBL/jRaji24lIwg6uxNshDv12BObL6jwpq5wvOJbGZBt+WTcIEXrzhrwRWkMfjI0GXcOIHsJq4yfA+VzuPpolV8NwU1X9DVsglEaTuu8jICyM3UWyz8HmmHHtuyeM8TJ3kYNlubNDGEF5aXeE+zv/GG06/VaiXFafaAAAAAElFTkSuQmCC" alt="" title="&errReload.label;" />&errReload.label;</button></td>
      <td style="width: 18%;">
-      <button type="button" id="tryGoogle" onclick="com.RealityRipple.Fierr.googlePage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oMBAojEJtqDWwAAAC9SURBVDjLtZLBDsIgEERnmv7peqShf2D9gxo8lm8dDxStFko9OAlZSNjHLLs077BVvD+U9+Yd0VC/S5Rg48A4B0VSLVCXk807ak1e5iAbB0KCecetqyIAAJY56LK+nGN20ipDkGTe4SgCkHmH79UB+LAdK/FvDnrzjpFUlKoOQFY78frElv1aJ5gHqTQH4ProJOAKlJywNYnpLGBCEbIDlHQE6XBC6TIT4JbKzE5PAXYQFrrwEwTvEk79wZGer2bLXhjNF9wAAAAASUVORK5CYII=" alt="" title="&errSearch.label;" />&errSearch.label;</button>
-      <button type="button" id="tryOn"     onclick="com.RealityRipple.Fierr.goOnline();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oMBAopIEdc1UoAAAChSURBVDjLvVPBDcMgDDxXrJOxskH+NX82YKwMdH1AFeNAhIpUSwjJ9p0P28h+bFixFxYtjAI5nfS+/dhkSkFOJ0ECJIB6k13SMARHF4goJCK0SqSUMObBWjO+vjcAEaOAvFd6sqrkIog/tD7aHqgL6gSBNlMQNEdnwFd+8LPNSQhln6iCmyn0VrnM2zSXtaADDxepJJlniXTBQwV//UzLBB+/oj4NzY4QzAAAAABJRU5ErkJggg==" alt="" title="&errGoOnline.label;" />&errGoOnline.label;</button>
+      <button type="button" id="tryGoogle" onclick="Fierr_PageScript.googlePage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oMBAojEJtqDWwAAAC9SURBVDjLtZLBDsIgEERnmv7peqShf2D9gxo8lm8dDxStFko9OAlZSNjHLLs077BVvD+U9+Yd0VC/S5Rg48A4B0VSLVCXk807ak1e5iAbB0KCecetqyIAAJY56LK+nGN20ipDkGTe4SgCkHmH79UB+LAdK/FvDnrzjpFUlKoOQFY78frElv1aJ5gHqTQH4ProJOAKlJywNYnpLGBCEbIDlHQE6XBC6TIT4JbKzE5PAXYQFrrwEwTvEk79wZGer2bLXhjNF9wAAAAASUVORK5CYII=" alt="" title="&errSearch.label;" />&errSearch.label;</button>
+      <button type="button" id="tryOn"     onclick="Fierr_PageScript.goOnline();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oMBAopIEdc1UoAAAChSURBVDjLvVPBDcMgDDxXrJOxskH+NX82YKwMdH1AFeNAhIpUSwjJ9p0P28h+bFixFxYtjAI5nfS+/dhkSkFOJ0ECJIB6k13SMARHF4goJCK0SqSUMObBWjO+vjcAEaOAvFd6sqrkIog/tD7aHqgL6gSBNlMQNEdnwFd+8LPNSQhln6iCmyn0VrnM2zSXtaADDxepJJlniXTBQwV//UzLBB+/oj4NzY4QzAAAAABJRU5ErkJggg==" alt="" title="&errGoOnline.label;" />&errGoOnline.label;</button>
      </td>
-     <td style="width: 35%;"><button type="button" id="tryStop"   onclick="com.RealityRipple.Fierr.stopReload();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oMBAojMKAELaQAAACzSURBVDjLjVPRFYQgDEt4rsNYbuAADOAGjuVAuQ8OsdBy1/f61NimSVHuR8YY13lrxPYjE05siEIvDjIsSx64H5lPExlOnwia9NFChAMA2w6u8xakKleaRzV8UJRM89s72dPsREZJ8jyDBMq3puhFBgCOgimK1s/jEo3/qLgIVYJjwRYGJxbgaSk/uh8JniVKPxTo3yXSv64s9KNUTdMsd/qkoL7k88H0hNvsWugkNqMf6gPFrFxbwqty/gAAAABJRU5ErkJggg==" alt="" title="&errStopReload.label;" /><span id="lblStop">&errStopReload.label;</span></button></td>
+     <td style="width: 35%;"><button type="button" id="tryStop"   onclick="Fierr_PageScript.stopReload();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oMBAojMKAELaQAAACzSURBVDjLjVPRFYQgDEt4rsNYbuAADOAGjuVAuQ8OsdBy1/f61NimSVHuR8YY13lrxPYjE05siEIvDjIsSx64H5lPExlOnwia9NFChAMA2w6u8xakKleaRzV8UJRM89s72dPsREZJ8jyDBMq3puhFBgCOgimK1s/jEo3/qLgIVYJjwRYGJxbgaSk/uh8JniVKPxTo3yXSv64s9KNUTdMsd/qkoL7k88H0hNvsWugkNqMf6gPFrFxbwqty/gAAAABJRU5ErkJggg==" alt="" title="&errStopReload.label;" /><span id="lblStop">&errStopReload.label;</span></button></td>
     </tr>
    </table>
   </div>
-  <script type="application/x-javascript">com.RealityRipple.Fierr.initPage();</script>
+  <script type="application/x-javascript">Fierr_PageScript.initPage();</script>
  </body>
 </html>

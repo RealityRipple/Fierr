@@ -1,43 +1,33 @@
-if (!com) var com = {};
-if (!com.RealityRipple) com.RealityRipple = {};
-com.RealityRipple.Fierr = function()
+var Fierr_FF =
 {
- var pub = {};
- var priv = {};
-
- priv.sURL = '';
-
- priv.timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
- priv.TIMER_ONE_SHOT = Components.interfaces.nsITimer.TYPE_ONE_SHOT;
-
- pub.Listen = function()
+ _sURL: '',
+ _timer: Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer),
+ Listen: function()
  {
-  window.removeEventListener('load', pub.Listen, false);
-  gBrowser.addProgressListener(pub.Listener);
- }
-
- pub.URL = function(winLoc)
+  window.removeEventListener('load', Fierr_FF.Listen, false);
+  gBrowser.addProgressListener(Fierr_FF.Listener);
+ },
+ _URL: function(winLoc)
  {
   if (winLoc.substr(0,17) == "http://go.online/")
   {
-   if (priv.sURL == decodeURIComponent(winLoc.substr(17)))
+   if (Fierr_FF._sURL == decodeURIComponent(winLoc.substr(17)))
     return;
    BrowserOffline.toggleOfflineStatus();
-   priv.sURL = decodeURIComponent(winLoc.substr(17));
-   priv.timer.init(pub.event, 500, priv.TIMER_ONE_SHOT);  
+   Fierr_FF._sURL = decodeURIComponent(winLoc.substr(17));
+   Fierr_FF._timer.init(Fierr_FF.event, 500, Components.interfaces.nsITimer.TYPE_ONE_SHOT);  
   }
- }
-
- pub.event =
+ },
+ event:
  {
   observe: function(subject, topic, data)
   {
-   window.content.location.href = priv.sURL;
-   priv.timer.cancel();
+   window.content.location.href = Fierr_FF._sURL;
+   Fierr_FF._sURL = '';
+   Fierr_FF._timer.cancel();
   }
- }
-
- pub.Listener =
+ },
+ Listener:
  {
   QueryInterface: function(aIID)
   {
@@ -50,16 +40,13 @@ com.RealityRipple.Fierr = function()
   onLocationChange: function(aProgress, aRequest, aURI)
   {
    if (aURI != null)
-    pub.URL(aURI.spec);
+    Fierr_FF._URL(aURI.spec);
   },
   onStateChange: function() {},
   onProgressChange: function() {},
   onStatusChange: function() {},
   onSecurityChange: function() {},
   onLinkIconAvailable: function() {}
- };	
-
- return pub;
-}();
-
-window.addEventListener('load', com.RealityRipple.Fierr.Listen, false);
+ }
+};
+window.addEventListener('load', Fierr_FF.Listen, false);

@@ -4,3 +4,4 @@
 <!ENTITY errGoOnline.label "Go Online">
 <!ENTITY errStopReload.label "Stop Reload">
 <!ENTITY errReloading.label "Reloading...">
+<!ENTITY errIsUp.label "Status">

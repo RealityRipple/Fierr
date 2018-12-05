@@ -91,27 +91,14 @@ ul
 {
  white-space: pre-wrap;
 }
-#errorTryAgain
+#errButtons
 {
- margin-top: 2em;
  -moz-margin-start: 80px;
+ line-height: 4em;
 }
-#brand
+#errButtons > button
 {
- position: absolute;
- right: 0;
- bottom: -1.5em;
- -moz-margin-end: 10px;
- opacity: .4;
-}
-body[dir="rtl"] #brand
-{
- right: auto;
- left: 0;
-}
-#brand > p
-{
- margin: 0;
+ margin-right: 1em;
 }
 #errorContainer
 {
@@ -128,6 +115,32 @@ button img
 {
  vertical-align: top;
  padding-right: 3px;
+}
+@media(max-width: 640px)
+{
+ #errorPageContainer
+ {
+  left: 25px;
+ }
+}
+@media(max-width: 800px)
+{
+ #errorTitle
+ {
+  -moz-margin-start: 20px;
+ }
+ #errorLongContent
+ {
+  -moz-margin-start: 20px;
+ }
+ #errButtons
+ {
+  -moz-margin-start: 20px;
+ }
+ #errorLongDesc
+ {
+  -moz-padding-end: 1em;
+ }
 }
 ]]>
 </style>
@@ -203,6 +216,11 @@ var Fierr_PageScript =
  {
   Fierr_PageScript.stopReload();
   window.content.location.href = "http://www.google.com/search?q=" + Fierr_PageScript._getOriginalPage(false);
+ },
+ isupPage: function()
+ {
+  Fierr_PageScript.stopReload();
+  window.content.location.href = "http://isup.me/" + Fierr_PageScript._getOriginalPage(true);
  },
  goOnline: function()
  {
@@ -411,18 +429,14 @@ var Fierr_PageScript =
      <br />
     </div>
    </div>
-   <table style="width: 100%;">
-    <tr>
-     <td style="width: 80px;"></td>
-     <td style="width: 18%;"><button type="button" id="tryBack"   onclick="Fierr_PageScript.backPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAD1BMVEVldC0AAAAQYJBQkP9goP9imi6UAAAAAXRSTlMAQObYZgAAAEVJREFUCNdjYEACggIQmtEFyhAxgjAYnRWhAsaCQCAAFDB2AQIBoAAIAJUxKhsrAQFQvRBUDVAIqotByAhmspIAml1oAAA2NwcuyJBq5gAAAABJRU5ErkJggg==" alt="" title="&errBack.label;" />&errBack.label;</button></td>
-     <td style="width: 18%;"><button type="button" id="tryAgain"  onclick="Fierr_PageScript.reloadPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAD1BMVEVldC0AAAAQYJBQkP9goP9imi6UAAAAAXRSTlMAQObYZgAAAFpJREFUCNdFjNERwCAIQ8MG4LlAcQPpAir7z1TAj+aHRy4JABFh4rjuvjqD3MzeHXBMh01GtyntwpNPwGTaqhdyIAGlzISFanVfAA3zEy7QYrlypKpPxav86wMTQQyjU0GqVwAAAABJRU5ErkJggg==" alt="" title="&errReload.label;" />&errReload.label;</button></td>
-     <td style="width: 18%;">
-      <button type="button" id="tryGoogle" onclick="Fierr_PageScript.googlePage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAElBMVEVjb2wAAAAQYJBQkP9goP////8yicqxAAAAAXRSTlMAQObYZgAAAE5JREFUCNdNjMERgDAIBO9mkj+oFWgLFgAd2H81IYRR97WzMAdABYmap7H3xpTHzKccLZg3iWLyL7T6YQRK7ey+FmW7a5zXSsCXzhIoXgY+qQb6UMpFtwAAAABJRU5ErkJggg==" alt="" title="&errSearch.label;" />&errSearch.label;</button>
-      <button type="button" id="tryOn"     onclick="Fierr_PageScript.goOnline();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAD1BMVEVldC0AAAAQYJBQkP9goP9imi6UAAAAAXRSTlMAQObYZgAAAE5JREFUCNd1zNENgDAIBFC6QTEuULwJel2gkf1nEvgz0fvhhcCJfEW112yOXTiJ1XN/E9wq7gwsFzJBilliWtxcgaHxdRCzipphvJv/8gD08AmuMOwZ+QAAAABJRU5ErkJggg==" alt="" title="&errGoOnline.label;" />&errGoOnline.label;</button>
-     </td>
-     <td style="width: 35%;"><button type="button" id="tryStop"   onclick="Fierr_PageScript.stopReload();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAD1BMVEVldC0AAAAQYJBQkP9goP9imi6UAAAAAXRSTlMAQObYZgAAAFVJREFUCNc1jsENwDAIA/EGdcoCyQbIE0Ri/5laSMvrOBkZMwNpPch9wPw6Ak707pnlkEnPWYYRo1J+hwqwFYpZ8Bo2SG3ejHTC/xUWx+yOsdZX1m88ofoJvufMJJQAAAAASUVORK5CYII=" alt="" title="&errStopReload.label;" /><span id="lblStop">&errStopReload.label;</span></button></td>
-    </tr>
-   </table>
+   <div id="errButtons">
+    <button type="button" id="tryBack"   onclick="Fierr_PageScript.backPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAD1BMVEVldC0AAAAQYJBQkP9goP9imi6UAAAAAXRSTlMAQObYZgAAAEVJREFUCNdjYEACggIQmtEFyhAxgjAYnRWhAsaCQCAAFDB2AQIBoAAIAJUxKhsrAQFQvRBUDVAIqotByAhmspIAml1oAAA2NwcuyJBq5gAAAABJRU5ErkJggg==" alt="" title="&errBack.label;" />&errBack.label;</button>
+    <button type="button" id="tryAgain"  onclick="Fierr_PageScript.reloadPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAD1BMVEVldC0AAAAQYJBQkP9goP9imi6UAAAAAXRSTlMAQObYZgAAAFpJREFUCNdFjNERwCAIQ8MG4LlAcQPpAir7z1TAj+aHRy4JABFh4rjuvjqD3MzeHXBMh01GtyntwpNPwGTaqhdyIAGlzISFanVfAA3zEy7QYrlypKpPxav86wMTQQyjU0GqVwAAAABJRU5ErkJggg==" alt="" title="&errReload.label;" />&errReload.label;</button>
+    <button type="button" id="tryIsUp"   onclick="Fierr_PageScript.isupPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAD1BMVEVldC0AAAAQYJBQkP9goP9imi6UAAAAAXRSTlMAQObYZgAAAENJREFUCNdjYGBgEBRkAANGFxcBMEPEyFgRLOCsqGwEEmJ0EhCBMASBYhDVIsYwhpEAlAEVYBCCMWAmIwBcRMQRq2IA3cQFVAUUrCkAAAAASUVORK5CYII" alt="" title="&errIsUp.label;" />&errIsUp.label;</button>
+    <button type="button" id="tryGoogle" onclick="Fierr_PageScript.googlePage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAElBMVEVjb2wAAAAQYJBQkP9goP////8yicqxAAAAAXRSTlMAQObYZgAAAE5JREFUCNdNjMERgDAIBO9mkj+oFWgLFgAd2H81IYRR97WzMAdABYmap7H3xpTHzKccLZg3iWLyL7T6YQRK7ey+FmW7a5zXSsCXzhIoXgY+qQb6UMpFtwAAAABJRU5ErkJggg==" alt="" title="&errSearch.label;" />&errSearch.label;</button>
+    <button type="button" id="tryOn"     onclick="Fierr_PageScript.goOnline();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAD1BMVEVldC0AAAAQYJBQkP9goP9imi6UAAAAAXRSTlMAQObYZgAAAE5JREFUCNd1zNENgDAIBFC6QTEuULwJel2gkf1nEvgz0fvhhcCJfEW112yOXTiJ1XN/E9wq7gwsFzJBilliWtxcgaHxdRCzipphvJv/8gD08AmuMOwZ+QAAAABJRU5ErkJggg==" alt="" title="&errGoOnline.label;" />&errGoOnline.label;</button>
+    <button type="button" id="tryStop"   onclick="Fierr_PageScript.stopReload();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAD1BMVEVldC0AAAAQYJBQkP9goP9imi6UAAAAAXRSTlMAQObYZgAAAFVJREFUCNc1jsENwDAIA/EGdcoCyQbIE0Ri/5laSMvrOBkZMwNpPch9wPw6Ak707pnlkEnPWYYRo1J+hwqwFYpZ8Bo2SG3ejHTC/xUWx+yOsdZX1m88ofoJvufMJJQAAAAASUVORK5CYII=" alt="" title="&errStopReload.label;" /><span id="lblStop">&errStopReload.label;</span></button>
+   </div>
   </div>
   <script type="application/x-javascript">Fierr_PageScript.initPage();</script>
  </body>

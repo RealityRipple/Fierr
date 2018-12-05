@@ -38,7 +38,7 @@ h1
 ul, ol
 {
  margin: 0;
- -moz-margin-start: 15px;
+ -moz-margin-start: 1.5em;
  padding: 0;
 }
 ul > li, ol > li
@@ -57,7 +57,7 @@ ul
  max-width: 65em;
  position: absolute;
  top: 30px;
- left: 5%;
+ left: 170px;
  right: 25px;
  color: #000000;
  font: 13px Verdana, sans-serif;
@@ -70,11 +70,11 @@ ul
 }
 #errorTitle
 {
- -moz-margin-start: 5%;
+ -moz-margin-start: 80px;
 }
 #errorLongContent
 {
- -moz-margin-start: 5%;
+ -moz-margin-start: 80px;
 }
 #errorShortDesc > p
 {
@@ -86,29 +86,21 @@ ul
 }
 #errorLongDesc
 {
- -moz-padding-end: 2%;
+ -moz-padding-end: 3em;
  font-size: 110%;
 }
 #errorLongDesc > p
 {
  white-space: pre-wrap;
 }
-#brand
+#errButtons
 {
- position: absolute;
- right: 0;
- bottom: -1.5em;
- -moz-margin-end: 10px;
- opacity: .4;
+ -moz-margin-start: 80px;
+ line-height: 4em;
 }
-body[dir="rtl"] #brand
+#errButtons > button
 {
- right: auto;
- left: 0;
-}
-#brand > p
-{
- margin: 0;
+ margin-right: 1em;
 }
 #errorContainer
 {
@@ -120,13 +112,41 @@ button
  max-width: 300px;
  font-weight: bold;
  padding: 3px;
- margin-right: 3px;
- margin-bottom: 3px;
 }
 button img
 {
  vertical-align: middle;
  padding-right: 3px;
+}
+@media(max-width: 640px)
+{
+ #errorPageContainer
+ {
+  left: 25px;
+ }
+}
+@media(max-width: 800px)
+{
+ #errorTitle
+ {
+  -moz-margin-start: 20px;
+ }
+ #errorLongContent
+ {
+  -moz-margin-start: 20px;
+ }
+ #errButtons
+ {
+  -moz-margin-start: 20px;
+ }
+ #errorLongDesc
+ {
+  -moz-padding-end: 1em;
+ }
+ #errorLongDesc
+ {
+  -moz-padding-end: 1em;
+ }
 }
 ]]>
 </style>
@@ -203,6 +223,11 @@ var Fierr_PageScript =
   Fierr_PageScript.stopReload();
   window.content.location.href = "http://www.google.com/search?q=" + Fierr_PageScript._getOriginalPage(false);
  },
+ isupPage: function()
+ {
+  Fierr_PageScript.stopReload();
+  window.content.location.href = "http://isup.me/" + Fierr_PageScript._getOriginalPage(true);
+ },
  _getDescription: function()
  {
   var url = document.documentURI;
@@ -257,6 +282,14 @@ var Fierr_PageScript =
   if (className == "expertBadCert")
   {
    Fierr_PageScript.showSecuritySection();
+  }
+  if (err == "remoteXUL")
+  {
+   document.getElementById("tryAgain").style.display = "none";
+  }
+  if (err == "cspFrameAncestorBlocked")
+  {
+   document.getElementById("tryAgain").style.display = "none";
   }
   if (err == "nssBadCert")
   {
@@ -347,6 +380,7 @@ var Fierr_PageScript =
     <h1 id="et_unsafeContentType">&unsafeContentType.title;</h1>
     <h1 id="et_nssFailure2">&nssFailure2.title;</h1>
     <h1 id="et_nssBadCert">&nssBadCert.title;</h1>
+    <h1 id="et_malwareBlocked">&malwareBlocked.title;</h1>
     <h1 id="et_cspFrameAncestorBlocked">&cspFrameAncestorBlocked.title;</h1>
     <h1 id="et_remoteXUL">&remoteXUL.title;</h1>
     <h1 id="et_corruptedContentError">&corruptedContentError.title;</h1>
@@ -373,6 +407,7 @@ var Fierr_PageScript =
     <div id="ed_unsafeContentType">&unsafeContentType.longDesc;</div>
     <div id="ed_nssFailure2">&nssFailure2.longDesc;</div>
     <div id="ed_nssBadCert">&nssBadCert.longDesc2;</div>
+    <div id="ed_malwareBlocked">&malwareBlocked.longDesc;</div>
     <div id="ed_cspFrameAncestorBlocked">&cspFrameAncestorBlocked.longDesc;</div>
     <div id="ed_remoteXUL">&remoteXUL.longDesc;</div>
     <div id="ed_corruptedContentError">&corruptedContentError.longDesc;</div>
@@ -393,9 +428,10 @@ var Fierr_PageScript =
      <br />
     </div>
    </div>
-   <div style="margin-left: 5%">
+   <div id="errButtons">
     <button type="button" id="tryBack"   onclick="Fierr_PageScript.backPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFZXQtAAAA/wAA/4BA//8Ak+ONhwAAAAF0Uk5TAEDm2GYAAABFSURBVAjXY2BAAoICEJrRBcoQMYIwGJ0VoQLGgkAgABQwdgECAaAACACVMSobKwEBUL0QVA1QCKqLQcgIZrKSAJpdaAAANjcHLsiQauYAAAAASUVORK5CYII=" alt="" title="&errBack.label;" />&errBack.label;</button>
     <button type="button" id="tryAgain"  onclick="Fierr_PageScript.reloadPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFZXQtAAAA/wAA/4BA//8Ak+ONhwAAAAF0Uk5TAEDm2GYAAABaSURBVAjXRYzREcAgCEPDBuC5QHED6QIq+89UwI/mh0cuCQARYeK47r46g9zM3h1wTIdNRrcp7cKTT8Bk2qoXciABpcyEhWp1XwAN8xMu0GK5cqSqT8Wr/OsDE0EMo1NBqlcAAAAASUVORK5CYII=" alt="" title="&errReload.label;" />&errReload.label;</button>
+    <button type="button" id="tryIsUp"   onclick="Fierr_PageScript.isupPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAD1BMVEVldC0AAAD/AAD/gED//wCT442HAAAAAXRSTlMAQObYZgAAAENJREFUCNdjYGBgEBRkAANGFxcBMEPEyFgRLOCsqGwEEmJ0EhCBMASBYhDVIsYwhpEAlAEVYBCCMWAmIwBcRMQRq2IA3cQFVAUUrCkAAAAASUVORK5CYII=" alt="" title="&errIsUp.label;" />&errIsUp.label;</button>
     <button type="button" id="tryGoogle" onclick="Fierr_PageScript.googlePage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAABJQTFRFY29sAAAA/wAA/4BA//8A////gBrx2wAAAAF0Uk5TAEDm2GYAAABOSURBVAjXTYzBEYAwCATvZpI/qBVoCxYAHdh/NSGEUfe1szAHQAWJmqex98aUx8ynHC2YN4li8i+0+mEESu3svhZlu2uc10rAl84SKF4GPqkG+lDKRbcAAAAASUVORK5CYII=" alt="" title="&errSearch.label;" />&errSearch.label;</button>
     <button type="button" id="tryStop"   onclick="Fierr_PageScript.stopReload();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFZXQtAAAA/wAA/4BA//8Ak+ONhwAAAAF0Uk5TAEDm2GYAAABVSURBVAjXNY7BDcAwCAPxBnXKAskGyBNEYv+ZWkjL6zgZGTMDaT3IfcD8OgJO9O6Z5ZBJz1mGEaNSfocKsBWKWfAaNkht3ox0wv8VFsfsjrHWV9ZvPKH6Cb7nzCSUAAAAAElFTkSuQmCC" alt="" title="&errStopReload.label;" /><span id="lblStop">&errStopReload.label;</span></button>
    </div>

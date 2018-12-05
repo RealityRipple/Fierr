@@ -54,12 +54,12 @@ h1
  padding-bottom: 1em;
  white-space: pre-wrap;
 }
-#errorButtons
+#errButtons
 {
  width: 100%;
  display: flex;
 }
-#errorButtons > button
+#errButtons > button
 {
  display: inline-block !important;
  flex: 1;
@@ -80,6 +80,13 @@ button img
  border-right-color: #DD9900;
  border-bottom-color: #DD9900;
  margin-right: 2px;
+}
+@media(max-width: 500px)
+{
+ #searchbutton img
+ {
+  display: none;
+ }
 }
 ]]>
 </style>
@@ -156,6 +163,11 @@ var Fierr_PageScript =
   Fierr_PageScript.stopReload();
   window.content.location.href = "http://www.google.com/search?q=" + Fierr_PageScript._getOriginalPage(false);
  },
+ isupPage: function()
+ {
+  Fierr_PageScript.stopReload();
+  window.content.location.href = "http://isup.me/" + Fierr_PageScript._getOriginalPage(true);
+ },
  _getDescription: function()
  {
   var url = document.documentURI;
@@ -222,15 +234,15 @@ var Fierr_PageScript =
   }
   if (err == "remoteXUL")
   {
-   document.getElementById("errorButtons").style.display = "none";
+   document.getElementById("tryAgain").style.display = "none";
   }
   if (err == "cspFrameAncestorBlocked")
   {
-   document.getElementById("errorButtons").style.displa = "none";
+   document.getElementById("tryAgain").style.display = "none";
   }
   if (err == "nssBadCert")
   {
-   document.getElementById("errorButtons").style.display = "none";
+   document.getElementById("tryAgain").style.display = "none";
    document.getElementById("errorPage").setAttribute("class", "certerror");
    Fierr_PageScript._addDomainErrorLink();
   }
@@ -243,17 +255,18 @@ var Fierr_PageScript =
   if (wifiButton)
   {
    wifiButton.insertAdjacentHTML('afterbegin', '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFZXQtAAAA/wAA/4BA//8Ak+ONhwAAAAF0Uk5TAEDm2GYAAABOSURBVAjXdczRDYAwCARQukExLlC8CXpdoJH9ZxL4M9H74YXAiXxFtddsjl04idVzfxPcKu4MLBcyQYpZYlrcXIGh8XUQs4qaYbyb//IA9PAJrjDsGfkAAAAASUVORK5CYII=" />');
+   setTimeout(
+    function()
+    {
+     if (wifiButton.style.display != 'none')
+      Fierr_PageScript.stopReload();
+    }, 50);
   }
   var searchButton = document.getElementById("searchbutton");
   if (searchButton)
   {
    searchButton.insertAdjacentHTML('afterbegin', '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAABJQTFRFY29sAAAA/wAA/4BA//8A////gBrx2wAAAAF0Uk5TAEDm2GYAAABOSURBVAjXTYzBEYAwCATvZpI/qBVoCxYAHdh/NSGEUfe1szAHQAWJmqex98aUx8ynHC2YN4li8i+0+mEESu3svhZlu2uc10rAl84SKF4GPqkG+lDKRbcAAAAASUVORK5CYII=" />');
   }
- },
- showSecuritySection: function()
- {
-  document.getElementById('securityOverrideContent').style.display = '';
-  document.getElementById('securityOverrideLink').style.display = 'none';
  },
  _addDomainErrorLink: function()
  {
@@ -313,6 +326,11 @@ var Fierr_PageScript =
    lblStop.textContent = Fierr_PageScript._errStopReload + " (" + Fierr_PageScript._Seconds + ")";
    Fierr_PageScript._TimerID = setTimeout(Fierr_PageScript.UpdateTimer, 1000);
   }
+ },
+ showSecuritySection: function()
+ {
+  document.getElementById('securityOverrideContent').style.display = '';
+  document.getElementById('securityOverrideLink').style.display = 'none';
  }
 };
  ]]></script>
@@ -341,6 +359,7 @@ var Fierr_PageScript =
     <h1 id="et_unsafeContentType">&unsafeContentType.title;</h1>
     <h1 id="et_nssFailure2">&nssFailure2.title;</h1>
     <h1 id="et_nssBadCert">&nssBadCert.title;</h1>
+    <h1 id="et_malwareBlocked">&malwareBlocked.title;</h1>
     <h1 id="et_cspFrameAncestorBlocked">&cspFrameAncestorBlocked.title;</h1>
     <h1 id="et_remoteXUL">&remoteXUL.title;</h1>
     <h1 id="et_corruptedContentError">&corruptedContentError.title;</h1>
@@ -367,6 +386,7 @@ var Fierr_PageScript =
     <div id="ed_unsafeContentType">&unsafeContentType.longDesc;</div>
     <div id="ed_nssFailure2">&nssFailure2.longDesc;</div>
     <div id="ed_nssBadCert">&nssBadCert.longDesc2;</div>
+    <div id="ed_malwareBlocked">&malwareBlocked.longDesc;</div>
     <div id="ed_cspFrameAncestorBlocked">&cspFrameAncestorBlocked.longDesc;</div>
     <div id="ed_remoteXUL">&remoteXUL.longDesc;</div>
     <div id="ed_corruptedContentError">&corruptedContentError.longDesc;</div>
@@ -386,11 +406,12 @@ var Fierr_PageScript =
      <div id="securityOverrideContent" style="display: none;">&securityOverride.warningContent;</div>
     </div>
    </div>
-   <div id="errorButtons">
+   <div id="errButtons">
     <button type="button" id="tryBack"   onclick="Fierr_PageScript.backPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFZXQtAAAA/wAA/4BA//8Ak+ONhwAAAAF0Uk5TAEDm2GYAAABFSURBVAjXY2BAAoICEJrRBcoQMYIwGJ0VoQLGgkAgABQwdgECAaAACACVMSobKwEBUL0QVA1QCKqLQcgIZrKSAJpdaAAANjcHLsiQauYAAAAASUVORK5CYII=" alt="" title="&errBack.label;" />&errBack.label;</button>
     <button type="button" id="tryAgain"  onclick="Fierr_PageScript.reloadPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFZXQtAAAA/wAA/4BA//8Ak+ONhwAAAAF0Uk5TAEDm2GYAAABaSURBVAjXRYzREcAgCEPDBuC5QHED6QIq+89UwI/mh0cuCQARYeK47r46g9zM3h1wTIdNRrcp7cKTT8Bk2qoXciABpcyEhWp1XwAN8xMu0GK5cqSqT8Wr/OsDE0EMo1NBqlcAAAAASUVORK5CYII=" alt="" title="&errReload.label;" />&errReload.label;</button>
-    <button type="button" id="tryStop"   onclick="Fierr_PageScript.stopReload();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFZXQtAAAA/wAA/4BA//8Ak+ONhwAAAAF0Uk5TAEDm2GYAAABVSURBVAjXNY7BDcAwCAPxBnXKAskGyBNEYv+ZWkjL6zgZGTMDaT3IfcD8OgJO9O6Z5ZBJz1mGEaNSfocKsBWKWfAaNkht3ox0wv8VFsfsjrHWV9ZvPKH6Cb7nzCSUAAAAAElFTkSuQmCC" alt="" title="&errStopReload.label;" /><span id="lblStop">&errStopReload.label;</span></button>
+    <button type="button" id="tryIsUp"   onclick="Fierr_PageScript.isupPage();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAD1BMVEVldC0AAAD/AAD/gED//wCT442HAAAAAXRSTlMAQObYZgAAAENJREFUCNdjYGBgEBRkAANGFxcBMEPEyFgRLOCsqGwEEmJ0EhCBMASBYhDVIsYwhpEAlAEVYBCCMWAmIwBcRMQRq2IA3cQFVAUUrCkAAAAASUVORK5CYII=" alt="" title="&errIsUp.label;" />&errIsUp.label;</button>
    </div>
+   <button type="button" id="tryStop"   onclick="Fierr_PageScript.stopReload();"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAAXNSR0IArs4c6QAAAA9QTFRFZXQtAAAA/wAA/4BA//8Ak+ONhwAAAAF0Uk5TAEDm2GYAAABVSURBVAjXNY7BDcAwCAPxBnXKAskGyBNEYv+ZWkjL6zgZGTMDaT3IfcD8OgJO9O6Z5ZBJz1mGEaNSfocKsBWKWfAaNkht3ox0wv8VFsfsjrHWV9ZvPKH6Cb7nzCSUAAAAAElFTkSuQmCC" alt="" title="&errStopReload.label;" /><span id="lblStop">&errStopReload.label;</span></button>
   </div>
   <div id="bgBox"></div>
   <script type="application/x-javascript">Fierr_PageScript.initPage();</script>

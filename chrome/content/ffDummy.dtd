@@ -46,5 +46,6 @@
 <!ENTITY netReset.longDesc3 "">
 <!ENTITY netTimeout.longDesc "">
 <!ENTITY netTimeout.longDesc2 "">
+<!ENTITY proxyResolveFailure.longDesc "">
 <!ENTITY proxyResolveFailure.longDesc2 "">
 <!ENTITY proxyResolveFailure.longDesc3 "">

@@ -9,9 +9,9 @@ var Fierr_FF =
  },
  _URL: function(winLoc)
  {
-  if (winLoc.substr(0,17) == "http://go.online/")
+  if (winLoc.substr(0,17) === "http://go.online/")
   {
-   if (Fierr_FF._sURL == decodeURIComponent(winLoc.substr(17)))
+   if (Fierr_FF._sURL === decodeURIComponent(winLoc.substr(17)))
     return;
    BrowserOffline.toggleOfflineStatus();
    Fierr_FF._sURL = decodeURIComponent(winLoc.substr(17));

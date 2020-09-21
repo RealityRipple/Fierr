@@ -1,7 +1,7 @@
 var Fierr_SM =
 {
  _sURL: '',
- _timer: Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer),
+ _timer: Components.classes['@mozilla.org/timer;1'].createInstance(Components.interfaces.nsITimer),
  Listen: function()
  {
   window.removeEventListener('load', Fierr_SM.Listen, false);
@@ -9,7 +9,7 @@ var Fierr_SM =
  },
  _URL: function(winLoc)
  {
-  if (winLoc.substr(0,17) == "http://go.online/")
+  if (winLoc.substr(0,17) == 'http://go.online/')
   {
    if (Fierr_SM._sURL == decodeURIComponent(winLoc.substr(17)))
     return;

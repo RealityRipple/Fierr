@@ -148,8 +148,8 @@ button img
  <script type="application/x-javascript">
   var localeFierr =
   {
-   errStopReload: "&errStopReload.label;",
-   errReloading:  "&errReloading.label;"
+   errStopReload: '&errStopReload.label;',
+   errReloading:  '&errReloading.label;'
   };<![CDATA[
 var Fierr_PageScript =
 {
@@ -170,7 +170,7 @@ var Fierr_PageScript =
   var url = document.documentURI;
   var matches = url.match(/s\=([^&]+)\&/);
   if (!matches || matches.length < 2)
-   return "";
+   return '';
   return decodeURIComponent(matches[1]);
  },
  _getOriginalPage: function(noEnd)
@@ -178,7 +178,7 @@ var Fierr_PageScript =
   var location = window.content.location.href;
   if (noEnd==true)
   {
-   var parts = location.split("#");
+   var parts = location.split('#');
    return parts[0];
   }
   else
@@ -199,7 +199,7 @@ var Fierr_PageScript =
  },
  stopReload: function()
  {
-  var cmdStop = document.getElementById("tryStop");
+  var cmdStop = document.getElementById('tryStop');
   if (cmdStop)
   {
    clearTimeout(Fierr_PageScript._TimerID);
@@ -215,110 +215,110 @@ var Fierr_PageScript =
  googlePage: function()
  {
   Fierr_PageScript.stopReload();
-  window.content.location.href = "http://www.google.com/search?q=" + Fierr_PageScript._getOriginalPage(false);
+  window.content.location.href = 'http://www.google.com/search?q=' + Fierr_PageScript._getOriginalPage(false);
  },
  isupPage: function()
  {
   Fierr_PageScript.stopReload();
-  window.content.location.href = "http://isup.me/" + Fierr_PageScript._getOriginalPage(true);
+  window.content.location.href = 'http://isup.me/' + Fierr_PageScript._getOriginalPage(true);
  },
  goOnline: function()
  {
   var sTemp = window.content.location.href;
-  window.content.location.href = "http://go.online/" + encodeURIComponent(sTemp);
+  window.content.location.href = 'http://go.online/' + encodeURIComponent(sTemp);
  },
  _getDescription: function()
  {
   var url = document.documentURI;
   var desc = url.search(/d\=/);
   if (desc == -1)
-   return "";
+   return '';
   return decodeURIComponent(url.slice(desc + 2));
  },
  initPage: function()
  {
   var err = Fierr_PageScript._getErrorCode();
-  var errTitle = document.getElementById("et_" + err);
-  var errDesc  = document.getElementById("ed_" + err);
+  var errTitle = document.getElementById('et_' + err);
+  var errDesc  = document.getElementById('ed_' + err);
   if (!errTitle || !errDesc)
   {
-   errTitle = document.getElementById("et_generic");
-   errDesc  = document.getElementById("ed_generic");
+   errTitle = document.getElementById('et_generic');
+   errDesc  = document.getElementById('ed_generic');
   }
-  var title = document.getElementById("errorTitleText");
+  var title = document.getElementById('errorTitleText');
   if (title)
   {
    title.parentNode.replaceChild(errTitle, title);
-   errTitle.id = "errorTitleText";
+   errTitle.id = 'errorTitleText';
   }
-  var sd = document.getElementById("errorShortDescText");
+  var sd = document.getElementById('errorShortDescText');
   if (sd)
    sd.textContent = Fierr_PageScript._getDescription();
-  var ld = document.getElementById("errorLongDesc");
+  var ld = document.getElementById('errorLongDesc');
   if (ld)
   {
    ld.parentNode.replaceChild(errDesc, ld);
-   errDesc.id = "errorLongDesc";
+   errDesc.id = 'errorLongDesc';
   }
-  if (err != "netOffline")
+  if (err != 'netOffline')
   {
-   var cmdOnline = document.getElementById("tryOn");
+   var cmdOnline = document.getElementById('tryOn');
    cmdOnline.parentNode.removeChild(cmdOnline);
    Fierr_PageScript._Seconds = Fierr_PageScript._DefaultTime;
   }
   else
   {
-   var cmdSearch = document.getElementById("tryGoogle");
+   var cmdSearch = document.getElementById('tryGoogle');
    cmdSearch.parentNode.removeChild(cmdSearch);
   }
-  var cmdStop = document.getElementById("tryStop");
-  var lblStop = document.getElementById("lblStop");
-  if(err == "connectionFailure" || err == "netTimeout" ||
-     err == "netReset" || err == "netInterrupt" ||
-     err == "proxyResolveFailure" || err == "proxyConnectFailure" ||
-     err == "dnsNotFound")
+  var cmdStop = document.getElementById('tryStop');
+  var lblStop = document.getElementById('lblStop');
+  if(err == 'connectionFailure' || err == 'netTimeout' ||
+     err == 'netReset' || err == 'netInterrupt' ||
+     err == 'proxyResolveFailure' || err == 'proxyConnectFailure' ||
+     err == 'dnsNotFound')
   {
-   lblStop.textContent = Fierr_PageScript._errStopReload + " (" + Fierr_PageScript._Seconds + ")";
+   lblStop.textContent = Fierr_PageScript._errStopReload + ' (' + Fierr_PageScript._Seconds + ')';
    Fierr_PageScript._TimerID = setTimeout(Fierr_PageScript.UpdateTimer, 1000);
   }
   else
   {
    cmdStop.parentNode.removeChild(cmdStop);
   }
-  var errContainer = document.getElementById("errorContainer");
+  var errContainer = document.getElementById('errorContainer');
   errContainer.parentNode.removeChild(errContainer);
   var className = Fierr_PageScript._getCSSClass();
-  if (className == "expertBadCert")
+  if (className == 'expertBadCert')
   {
    Fierr_PageScript.showSecuritySection();
   }
-  if (err == "nssBadCert")
+  if (err == 'nssBadCert')
   {
-   document.getElementById("tryAgain").style.display = "none";
-   document.getElementById("errorPageContainer").setAttribute("class", "certerror");
+   document.getElementById('tryAgain').style.display = 'none';
+   document.getElementById('errorPageContainer').setAttribute('class', 'certerror');
    Fierr_PageScript._addDomainErrorLink();
   }
   else
   {
-   var secOverride = document.getElementById("securityOverrideDiv");
+   var secOverride = document.getElementById('securityOverrideDiv');
    secOverride.parentNode.removeChild(secOverride);
   }
  },
  _addDomainErrorLink: function()
  {
-  var sd = document.getElementById("errorShortDescText");
+  var sd = document.getElementById('errorShortDescText');
   if (sd)
    sd.textContent = Fierr_PageScript._getDescription();
   var link = document.getElementById('cert_domain_link');
   if (!link)
    return;
-  var okHost = link.getAttribute("title");
+  var okHost = link.getAttribute('title');
   var thisHost = document.location.hostname;
   var proto = document.location.protocol;
-  okHost = okHost.replace(/^\*\./, "www.");
-  if (Fierr_PageScript._endsWith(okHost, "." + thisHost))
+  okHost = okHost.replace(/^\*\./, 'www.');
+  if (Fierr_PageScript._endsWith(okHost, '.' + thisHost))
    link.href = proto + okHost;
-  if (Fierr_PageScript._endsWith(thisHost, "." + okHost))
+  if (Fierr_PageScript._endsWith(thisHost, '.' + okHost))
    link.href = proto + okHost;
  },
  _endsWith: function(haystack, needle)
@@ -333,8 +333,8 @@ var Fierr_PageScript =
    Fierr_PageScript._TimerID = 0;
   }
   Fierr_PageScript._Seconds--;
-  var cmdStop = document.getElementById("tryStop");
-  var lblStop = document.getElementById("lblStop");
+  var cmdStop = document.getElementById('tryStop');
+  var lblStop = document.getElementById('lblStop');
   if (Fierr_PageScript._Seconds == 0)
   {
    lblStop.textContent = Fierr_PageScript._errReloading;
@@ -345,7 +345,7 @@ var Fierr_PageScript =
   else
   {
    cmdStop.disabled = false;
-   lblStop.textContent = Fierr_PageScript._errStopReload + " (" + Fierr_PageScript._Seconds + ")";
+   lblStop.textContent = Fierr_PageScript._errStopReload + ' (' + Fierr_PageScript._Seconds + ')';
    Fierr_PageScript._TimerID = setTimeout(Fierr_PageScript.UpdateTimer, 1000);
   }
  },

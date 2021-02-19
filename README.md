@@ -2,9 +2,9 @@
 Replace your error page with a more stylish appearance with additional features.
 
 #### Supports
- * Pale Moon [25.0a1pre - 28.*]
+ * Pale Moon [25.0a1pre - 29.*]
  * Firefox [1.5 - 56.*]
- * SeaMonkey [2.0a1 - 2.55]
+ * SeaMonkey [2.0a1 - 2.*]
  * Fennec [2.0a1 - 40.*]
  * Firefox for Android [10.0a1 - 56.*]
  * AdBlock Browser [1.0 - 1.3.2]

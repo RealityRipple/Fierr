@@ -1,7 +1,7 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
  <Description about="urn:mozilla:install-manifest">
-  <em:name>Fierr</em:name>
+  <em:name>Fierr (Customized for [TEXT_CUSTOMIZER])</em:name>
   <em:id>{AF1AD85E-20B4-517C-9A93-B3E51B6EB86F}</em:id>
   <em:version>2.2</em:version>
   <em:type>2</em:type>
@@ -55,7 +55,6 @@
   </em:targetApplication>
   <em:description>Replaces the error page with a more stylish appearance with additional features.</em:description>
   <em:homepageURL>https://realityripple.com/Software/Mozilla-Extensions/Fierr/</em:homepageURL>
-  <em:updateURL>https://realityripple.com/Software/Mozilla-Extensions/Fierr/update.rdf</em:updateURL>
   <em:iconURL>chrome://fierr/skin/logo.png</em:iconURL>
   <em:icon64URL>chrome://fierr/skin/logo64.png</em:icon64URL>
   <em:creator>RealityRipple</em:creator>

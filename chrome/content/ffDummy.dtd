@@ -8,10 +8,16 @@
 <!ENTITY nssBadCert.longDesc2 "">
 <!ENTITY malwareBlocked.title "">
 <!ENTITY malwareBlocked.longDesc "">
+<!ENTITY phishingBlocked.title "">
+<!ENTITY phishingBlocked.longDesc "">
 <!ENTITY securityOverride.linkText "">
 <!ENTITY securityOverride.warningText "">
+<!ENTITY securityOverride.warningContent "">
 <!ENTITY netOffline.overrideLongDesc "">
 <!ENTITY netOffline.longDesc "">
+<!ENTITY netOffline.longDesc2 "">
+<!ENTITY netOffline.longDesc3 "">
+<!ENTITY netOffline2.longDesc "">
 <!ENTITY unknownProtocolFound.title "">
 <!ENTITY unknownProtocolFound.longDesc "">
 <!ENTITY protocolNotFound.title "">
@@ -40,7 +46,6 @@
 <!ENTITY netReset.longDesc3 "">
 <!ENTITY netTimeout.longDesc "">
 <!ENTITY netTimeout.longDesc2 "">
+<!ENTITY proxyResolveFailure.longDesc "">
 <!ENTITY proxyResolveFailure.longDesc2 "">
 <!ENTITY proxyResolveFailure.longDesc3 "">
-<!ENTITY netOffline.longDesc2 "">
-<!ENTITY netOffline.longDesc3 "">

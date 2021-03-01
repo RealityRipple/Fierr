@@ -13,7 +13,7 @@
 ]>
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
-  <meta name="viewport" content="width=device-width; user-scalable=false;" /> 
+  <meta name="viewport" content="width=device-width; user-scalable=false;" />
   <title>&loadError.label;</title>
   <link rel="stylesheet" href="chrome://global/skin/netError.css" type="text/css" media="all" />
 <style type="text/css">
@@ -60,12 +60,12 @@ h1
  padding-bottom: 1em;
  white-space: pre-wrap;
 }
-#errorButtons
+#errButtons
 {
  width: 100%;
  display: flex;
 }
-#errorButtons > button
+#errButtons > button
 {
  display: inline-block !important;
  flex: 1;
@@ -77,6 +77,7 @@ button img
 {
  vertical-align: middle;
  padding-right: 3px;
+ width: 16px;
 }
 #searchbox > input
 {
@@ -86,6 +87,13 @@ button img
  border-right-color: [COLOR_BORDER_BR];
  border-bottom-color: [COLOR_BORDER_BR];
  margin-right: 2px;
+}
+@media(max-width: 500px)
+{
+ #searchbutton img
+ {
+  display: none;
+ }
 }
 ]]>
 </style>
@@ -162,6 +170,11 @@ var Fierr_PageScript =
   Fierr_PageScript.stopReload();
   window.content.location.href = "http://www.google.com/search?q=" + Fierr_PageScript._getOriginalPage(false);
  },
+ isupPage: function()
+ {
+  Fierr_PageScript.stopReload();
+  window.content.location.href = "http://isup.me/" + Fierr_PageScript._getOriginalPage(true);
+ },
  _getDescription: function()
  {
   var url = document.documentURI;
@@ -228,15 +241,15 @@ var Fierr_PageScript =
   }
   if (err == "remoteXUL")
   {
-   document.getElementById("errorButtons").style.display = "none";
+   document.getElementById("tryAgain").style.display = "none";
   }
   if (err == "cspFrameAncestorBlocked")
   {
-   document.getElementById("errorButtons").style.displa = "none";
+   document.getElementById("tryAgain").style.display = "none";
   }
   if (err == "nssBadCert")
   {
-   document.getElementById("errorButtons").style.display = "none";
+   document.getElementById("tryAgain").style.display = "none";
    document.getElementById("errorPage").setAttribute("class", "certerror");
    Fierr_PageScript._addDomainErrorLink();
   }
@@ -248,18 +261,25 @@ var Fierr_PageScript =
   var wifiButton = document.getElementById("wifi");
   if (wifiButton)
   {
-   wifiButton.insertAdjacentHTML('afterbegin', '<img src="data:[IMAGE_BUTTON_GO_ONLINE_MIME];base64,[IMAGE_BUTTON_GO_ONLINE]" />');
-  } 
+   var wifi1x = 'data:[IMAGE_BUTTON_GO_ONLINE_MIME];base64,[IMAGE_BUTTON_GO_ONLINE]';
+   var wifi2x = 'data:[IMAGE_BUTTON2_GO_ONLINE_MIME];base64,[IMAGE_BUTTON2_GO_ONLINE]';
+   var wifi3x = 'data:[IMAGE_BUTTON3_GO_ONLINE_MIME];base64,[IMAGE_BUTTON3_GO_ONLINE]';
+   wifiButton.insertAdjacentHTML('afterbegin', '<img src="' + wifi1x + '" srcset="' + wifi1x + ' 16w, ' + wifi2x + ' 32w, ' + wifi3x + ' 48w" sizes="(max-resolution: 1dppx) 16px, (max-resolution: 2dppx) 32px, 48px" />');
+   setTimeout(
+    function()
+    {
+     if (wifiButton.style.display != 'none')
+      Fierr_PageScript.stopReload();
+    }, 50);
+  }
   var searchButton = document.getElementById("searchbutton");
   if (searchButton)
   {
-   searchButton.insertAdjacentHTML('afterbegin', '<img src="data:[IMAGE_BUTTON_SEARCH_MIME];base64,[IMAGE_BUTTON_SEARCH]" />');
+   var search1x = 'data:[IMAGE_BUTTON_SEARCH_MIME];base64,[IMAGE_BUTTON_SEARCH]';
+   var search2x = 'data:[IMAGE_BUTTON2_SEARCH_MIME];base64,[IMAGE_BUTTON2_SEARCH]';
+   var search3x = 'data:[IMAGE_BUTTON3_SEARCH_MIME];base64,[IMAGE_BUTTON3_SEARCH]';
+   searchButton.insertAdjacentHTML('afterbegin', '<img src="' + search1x + '" srcset="' + search1x + ' 16w, ' + search2x + ' 32w, ' + search3x + ' 48w" sizes="(max-resolution: 1dppx) 16px, (max-resolution: 2dppx) 32px, 48px" />');
   }
- },
- showSecuritySection: function()
- {
-  document.getElementById('securityOverrideContent').style.display = '';
-  document.getElementById('securityOverrideLink').style.display = 'none';
  },
  _addDomainErrorLink: function()
  {
@@ -298,10 +318,10 @@ var Fierr_PageScript =
  },
  UpdateTimer: function()
  {
-  if (Fierr_PageScript._TimerID) 
-  { 
-   clearTimeout(Fierr_PageScript._TimerID); 
-   Fierr_PageScript._TimerID = 0; 
+  if (Fierr_PageScript._TimerID)
+  {
+   clearTimeout(Fierr_PageScript._TimerID);
+   Fierr_PageScript._TimerID = 0;
   }
   Fierr_PageScript._Seconds--;
   var cmdStop = document.getElementById("tryStop");
@@ -319,6 +339,11 @@ var Fierr_PageScript =
    lblStop.textContent = Fierr_PageScript._errStopReload + " (" + Fierr_PageScript._Seconds + ")";
    Fierr_PageScript._TimerID = setTimeout(Fierr_PageScript.UpdateTimer, 1000);
   }
+ },
+ showSecuritySection: function()
+ {
+  document.getElementById('securityOverrideContent').style.display = '';
+  document.getElementById('securityOverrideLink').style.display = 'none';
  }
 };
  ]]></script>
@@ -347,6 +372,7 @@ var Fierr_PageScript =
     <h1 id="et_unsafeContentType">&unsafeContentType.title;</h1>
     <h1 id="et_nssFailure2">&nssFailure2.title;</h1>
     <h1 id="et_nssBadCert">&nssBadCert.title;</h1>
+    <h1 id="et_malwareBlocked">&malwareBlocked.title;</h1>
     <h1 id="et_cspFrameAncestorBlocked">&cspFrameAncestorBlocked.title;</h1>
     <h1 id="et_remoteXUL">&remoteXUL.title;</h1>
     <h1 id="et_corruptedContentError">&corruptedContentError.title;</h1>
@@ -373,6 +399,7 @@ var Fierr_PageScript =
     <div id="ed_unsafeContentType">&unsafeContentType.longDesc;</div>
     <div id="ed_nssFailure2">&nssFailure2.longDesc;</div>
     <div id="ed_nssBadCert">&nssBadCert.longDesc2;</div>
+    <div id="ed_malwareBlocked">&malwareBlocked.longDesc;</div>
     <div id="ed_cspFrameAncestorBlocked">&cspFrameAncestorBlocked.longDesc;</div>
     <div id="ed_remoteXUL">&remoteXUL.longDesc;</div>
     <div id="ed_corruptedContentError">&corruptedContentError.longDesc;</div>
@@ -392,11 +419,12 @@ var Fierr_PageScript =
      <div id="securityOverrideContent" style="display: none;">&securityOverride.warningContent;</div>
     </div>
    </div>
-   <div id="errorButtons">
-    <button type="button" id="tryBack"   onclick="Fierr_PageScript.backPage();"><img src="data:[IMAGE_BUTTON_BACK_MIME];base64,[IMAGE_BUTTON_BACK]" alt="" title="&errBack.label;" />&errBack.label;</button>
-    <button type="button" id="tryAgain"  onclick="Fierr_PageScript.reloadPage();"><img src="data:[IMAGE_BUTTON_RELOAD_MIME];base64,[IMAGE_BUTTON_RELOAD]" alt="" title="&errReload.label;" />&errReload.label;</button>
-    <button type="button" id="tryStop"   onclick="Fierr_PageScript.stopReload();"><img src="data:[IMAGE_BUTTON_STOP_RELOAD_MIME];base64,[IMAGE_BUTTON_STOP_RELOAD]" alt="" title="&errStopReload.label;" /><span id="lblStop">&errStopReload.label;</span></button>
+   <div id="errButtons">
+    <button type="button" id="tryBack"   onclick="Fierr_PageScript.backPage();"><img src="data:[IMAGE_BUTTON_BACK_MIME];base64,[IMAGE_BUTTON_BACK]" srcset="data:[IMAGE_BUTTON_BACK_MIME];base64,[IMAGE_BUTTON_BACK] 16w, data:[IMAGE_BUTTON2_BACK_MIME];base64,[IMAGE_BUTTON2_BACK] 32w, data:[IMAGE_BUTTON3_BACK_MIME];base64,[IMAGE_BUTTON3_BACK] 48w" sizes="(max-resolution: 1dppx) 16px, (max-resolution: 2dppx) 32px, 48px" alt="" title="&errBack.label;" />&errBack.label;</button>
+    <button type="button" id="tryAgain"  onclick="Fierr_PageScript.reloadPage();"><img src="data:[IMAGE_BUTTON_RELOAD_MIME];base64,[IMAGE_BUTTON_RELOAD]" srcset="data:[IMAGE_BUTTON_RELOAD_MIME];base64,[IMAGE_BUTTON_RELOAD] 16w, data:[IMAGE_BUTTON2_RELOAD_MIME];base64,[IMAGE_BUTTON2_RELOAD] 32w, data:[IMAGE_BUTTON3_RELOAD_MIME];base64,[IMAGE_BUTTON3_RELOAD] 48w" sizes="(max-resolution: 1dppx) 16px, (max-resolution: 2dppx) 32px, 48px" alt="" title="&errReload.label;" />&errReload.label;</button>
+    <button type="button" id="tryIsUp"   onclick="Fierr_PageScript.isupPage();"><img src="data:[IMAGE_BUTTON_STATUS_MIME];base64,[IMAGE_BUTTON_STATUS]" srcset="data:[IMAGE_BUTTON_STATUS_MIME];base64,[IMAGE_BUTTON_STATUS] 16w, data:[IMAGE_BUTTON2_STATUS_MIME];base64,[IMAGE_BUTTON2_STATUS] 32w, data:[IMAGE_BUTTON3_STATUS_MIME];base64,[IMAGE_BUTTON3_STATUS] 48w" sizes="(max-resolution: 1dppx) 16px, (max-resolution: 2dppx) 32px, 48px" alt="" title="&errIsUp.label;" />&errIsUp.label;</button>
    </div>
+   <button type="button" id="tryStop"   onclick="Fierr_PageScript.stopReload();"><img src="data:[IMAGE_BUTTON_STOP_RELOAD_MIME];base64,[IMAGE_BUTTON_STOP_RELOAD]" srcset="data:[IMAGE_BUTTON_STOP_RELOAD_MIME];base64,[IMAGE_BUTTON_STOP_RELOAD] 16w, data:[IMAGE_BUTTON2_STOP_RELOAD_MIME];base64,[IMAGE_BUTTON2_STOP_RELOAD] 32w, data:[IMAGE_BUTTON3_STOP_RELOAD_MIME];base64,[IMAGE_BUTTON3_STOP_RELOAD] 48w" sizes="(max-resolution: 1dppx) 16px, (max-resolution: 2dppx) 32px, 48px" alt="" title="&errStopReload.label;" /><span id="lblStop">&errStopReload.label;</span></button>
   </div>
   <div id="bgBox"></div>
   <script type="application/x-javascript">Fierr_PageScript.initPage();</script>

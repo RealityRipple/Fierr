@@ -13,7 +13,7 @@
 ]>
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
-  <meta name="viewport" content="width=device-width; user-scalable=false;" /> 
+  <meta name="viewport" content="width=device-width; user-scalable=false;" />
   <title>&loadError.label;</title>
 <style type="text/css">
 <![CDATA[
@@ -38,7 +38,7 @@ h1
 ul, ol
 {
  margin: 0;
- -moz-margin-start: 15px;
+ -moz-margin-start: 1.5em;
  padding: 0;
 }
 ul > li, ol > li
@@ -57,7 +57,7 @@ ul
  max-width: 65em;
  position: absolute;
  top: 30px;
- left: 5%;
+ left: 170px;
  right: 25px;
  color: [COLOR_FOREGROUND];
  font: 13px Verdana, sans-serif;
@@ -70,11 +70,11 @@ ul
 }
 #errorTitle
 {
- -moz-margin-start: 5%;
+ -moz-margin-start: 80px;
 }
 #errorLongContent
 {
- -moz-margin-start: 5%;
+ -moz-margin-start: 80px;
 }
 #errorShortDesc > p
 {
@@ -86,29 +86,21 @@ ul
 }
 #errorLongDesc
 {
- -moz-padding-end: 2%;
+ -moz-padding-end: 3em;
  font-size: 110%;
 }
 #errorLongDesc > p
 {
  white-space: pre-wrap;
 }
-#brand
+#errButtons
 {
- position: absolute;
- right: 0;
- bottom: -1.5em;
- -moz-margin-end: 10px;
- opacity: .4;
+ -moz-margin-start: 80px;
+ line-height: 4em;
 }
-body[dir="rtl"] #brand
+#errButtons > button
 {
- right: auto;
- left: 0;
-}
-#brand > p
-{
- margin: 0;
+ margin-right: 1em;
 }
 #errorContainer
 {
@@ -120,13 +112,42 @@ button
  max-width: 300px;
  font-weight: bold;
  padding: 3px;
- margin-right: 3px;
- margin-bottom: 3px;
 }
 button img
 {
  vertical-align: middle;
  padding-right: 3px;
+ width: 16px;
+}
+@media(max-width: 640px)
+{
+ #errorPageContainer
+ {
+  left: 25px;
+ }
+}
+@media(max-width: 800px)
+{
+ #errorTitle
+ {
+  -moz-margin-start: 20px;
+ }
+ #errorLongContent
+ {
+  -moz-margin-start: 20px;
+ }
+ #errButtons
+ {
+  -moz-margin-start: 20px;
+ }
+ #errorLongDesc
+ {
+  -moz-padding-end: 1em;
+ }
+ #errorLongDesc
+ {
+  -moz-padding-end: 1em;
+ }
 }
 ]]>
 </style>
@@ -203,6 +224,11 @@ var Fierr_PageScript =
   Fierr_PageScript.stopReload();
   window.content.location.href = "http://www.google.com/search?q=" + Fierr_PageScript._getOriginalPage(false);
  },
+ isupPage: function()
+ {
+  Fierr_PageScript.stopReload();
+  window.content.location.href = "http://isup.me/" + Fierr_PageScript._getOriginalPage(true);
+ },
  _getDescription: function()
  {
   var url = document.documentURI;
@@ -258,6 +284,14 @@ var Fierr_PageScript =
   {
    Fierr_PageScript.showSecuritySection();
   }
+  if (err == "remoteXUL")
+  {
+   document.getElementById("tryAgain").style.display = "none";
+  }
+  if (err == "cspFrameAncestorBlocked")
+  {
+   document.getElementById("tryAgain").style.display = "none";
+  }
   if (err == "nssBadCert")
   {
    document.getElementById("tryAgain").style.display = "none";
@@ -293,10 +327,10 @@ var Fierr_PageScript =
  },
  UpdateTimer: function()
  {
-  if (Fierr_PageScript._TimerID) 
-  { 
-   clearTimeout(Fierr_PageScript._TimerID); 
-   Fierr_PageScript._TimerID = 0; 
+  if (Fierr_PageScript._TimerID)
+  {
+   clearTimeout(Fierr_PageScript._TimerID);
+   Fierr_PageScript._TimerID = 0;
   }
   Fierr_PageScript._Seconds--;
   var cmdStop = document.getElementById("tryStop");
@@ -347,6 +381,7 @@ var Fierr_PageScript =
     <h1 id="et_unsafeContentType">&unsafeContentType.title;</h1>
     <h1 id="et_nssFailure2">&nssFailure2.title;</h1>
     <h1 id="et_nssBadCert">&nssBadCert.title;</h1>
+    <h1 id="et_malwareBlocked">&malwareBlocked.title;</h1>
     <h1 id="et_cspFrameAncestorBlocked">&cspFrameAncestorBlocked.title;</h1>
     <h1 id="et_remoteXUL">&remoteXUL.title;</h1>
     <h1 id="et_corruptedContentError">&corruptedContentError.title;</h1>
@@ -373,6 +408,7 @@ var Fierr_PageScript =
     <div id="ed_unsafeContentType">&unsafeContentType.longDesc;</div>
     <div id="ed_nssFailure2">&nssFailure2.longDesc;</div>
     <div id="ed_nssBadCert">&nssBadCert.longDesc2;</div>
+    <div id="ed_malwareBlocked">&malwareBlocked.longDesc;</div>
     <div id="ed_cspFrameAncestorBlocked">&cspFrameAncestorBlocked.longDesc;</div>
     <div id="ed_remoteXUL">&remoteXUL.longDesc;</div>
     <div id="ed_corruptedContentError">&corruptedContentError.longDesc;</div>
@@ -393,11 +429,12 @@ var Fierr_PageScript =
      <br />
     </div>
    </div>
-   <div style="margin-left: 5%">
-    <button type="button" id="tryBack"   onclick="Fierr_PageScript.backPage();"><img src="data:[IMAGE_BUTTON_BACK_MIME];base64,[IMAGE_BUTTON_BACK]" alt="" title="&errBack.label;" />&errBack.label;</button>
-    <button type="button" id="tryAgain"  onclick="Fierr_PageScript.reloadPage();"><img src="data:[IMAGE_BUTTON_RELOAD_MIME];base64,[IMAGE_BUTTON_RELOAD]" alt="" title="&errReload.label;" />&errReload.label;</button>
-    <button type="button" id="tryGoogle" onclick="Fierr_PageScript.googlePage();"><img src="data:[IMAGE_BUTTON_SEARCH_MIME];base64,[IMAGE_BUTTON_SEARCH]" alt="" title="&errSearch.label;" />&errSearch.label;</button>
-    <button type="button" id="tryStop"   onclick="Fierr_PageScript.stopReload();"><img src="data:[IMAGE_BUTTON_STOP_RELOAD_MIME];base64,[IMAGE_BUTTON_STOP_RELOAD]" alt="" title="&errStopReload.label;" /><span id="lblStop">&errStopReload.label;</span></button>
+   <div id="errButtons">
+    <button type="button" id="tryBack"   onclick="Fierr_PageScript.backPage();"><img src="data:[IMAGE_BUTTON_BACK_MIME];base64,[IMAGE_BUTTON_BACK]" srcset="data:[IMAGE_BUTTON_BACK_MIME];base64,[IMAGE_BUTTON_BACK] 16w, data:[IMAGE_BUTTON2_BACK_MIME];base64,[IMAGE_BUTTON2_BACK] 32w, data:[IMAGE_BUTTON3_BACK_MIME];base64,[IMAGE_BUTTON3_BACK] 48w" sizes="(max-resolution: 1dppx) 16px, (max-resolution: 2dppx) 32px, 48px" alt="" title="&errBack.label;" />&errBack.label;</button>
+    <button type="button" id="tryAgain"  onclick="Fierr_PageScript.reloadPage();"><img src="data:[IMAGE_BUTTON_RELOAD_MIME];base64,[IMAGE_BUTTON_RELOAD]" srcset="data:[IMAGE_BUTTON_RELOAD_MIME];base64,[IMAGE_BUTTON_RELOAD] 16w, data:[IMAGE_BUTTON2_RELOAD_MIME];base64,[IMAGE_BUTTON2_RELOAD] 32w, data:[IMAGE_BUTTON3_RELOAD_MIME];base64,[IMAGE_BUTTON3_RELOAD] 48w" sizes="(max-resolution: 1dppx) 16px, (max-resolution: 2dppx) 32px, 48px" alt="" title="&errReload.label;" />&errReload.label;</button>
+    <button type="button" id="tryIsUp"   onclick="Fierr_PageScript.isupPage();"><img src="data:[IMAGE_BUTTON_STATUS_MIME];base64,[IMAGE_BUTTON_STATUS]" srcset="data:[IMAGE_BUTTON_STATUS_MIME];base64,[IMAGE_BUTTON_STATUS] 16w, data:[IMAGE_BUTTON2_STATUS_MIME];base64,[IMAGE_BUTTON2_STATUS] 32w, data:[IMAGE_BUTTON3_STATUS_MIME];base64,[IMAGE_BUTTON3_STATUS] 48w" sizes="(max-resolution: 1dppx) 16px, (max-resolution: 2dppx) 32px, 48px" alt="" title="&errIsUp.label;" />&errIsUp.label;</button>
+    <button type="button" id="tryGoogle" onclick="Fierr_PageScript.googlePage();"><img src="data:[IMAGE_BUTTON_SEARCH_MIME];base64,[IMAGE_BUTTON_SEARCH]" srcset="data:[IMAGE_BUTTON_SEARCH_MIME];base64,[IMAGE_BUTTON_SEARCH] 16w, data:[IMAGE_BUTTON2_SEARCH_MIME];base64,[IMAGE_BUTTON2_SEARCH] 32w, data:[IMAGE_BUTTON3_SEARCH_MIME];base64,[IMAGE_BUTTON3_SEARCH] 48w" sizes="(max-resolution: 1dppx) 16px, (max-resolution: 2dppx) 32px, 48px" alt="" title="&errSearch.label;" />&errSearch.label;</button>
+    <button type="button" id="tryStop"   onclick="Fierr_PageScript.stopReload();"><img src="data:[IMAGE_BUTTON_STOP_RELOAD_MIME];base64,[IMAGE_BUTTON_STOP_RELOAD]" srcset="data:[IMAGE_BUTTON_STOP_RELOAD_MIME];base64,[IMAGE_BUTTON_STOP_RELOAD] 16w, data:[IMAGE_BUTTON2_STOP_RELOAD_MIME];base64,[IMAGE_BUTTON2_STOP_RELOAD] 32w, data:[IMAGE_BUTTON3_STOP_RELOAD_MIME];base64,[IMAGE_BUTTON3_STOP_RELOAD] 48w" sizes="(max-resolution: 1dppx) 16px, (max-resolution: 2dppx) 32px, 48px" alt="" title="&errStopReload.label;" /><span id="lblStop">&errStopReload.label;</span></button>
    </div>
   </div>
   <script type="application/x-javascript">Fierr_PageScript.initPage();</script>

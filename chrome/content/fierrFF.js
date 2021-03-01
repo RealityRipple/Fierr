@@ -15,7 +15,7 @@ var Fierr_FF =
     return;
    BrowserOffline.toggleOfflineStatus();
    Fierr_FF._sURL = decodeURIComponent(winLoc.substr(17));
-   Fierr_FF._timer.init(Fierr_FF.event, 500, Components.interfaces.nsITimer.TYPE_ONE_SHOT);  
+   Fierr_FF._timer.init(Fierr_FF.event, 500, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
   }
  },
  event:

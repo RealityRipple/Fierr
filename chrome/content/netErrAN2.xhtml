@@ -101,8 +101,8 @@ button img
  <script type="application/x-javascript">
   var localeFierr =
   {
-   errStopReload: "&errStopReload.label;",
-   errReloading:  "&errReloading.label;"
+   errStopReload: '&errStopReload.label;',
+   errReloading:  '&errReloading.label;'
   };<![CDATA[
 var Fierr_PageScript =
 {
@@ -123,7 +123,7 @@ var Fierr_PageScript =
   var url = document.documentURI;
   var matches = url.match(/s\=([^&]+)\&/);
   if (!matches || matches.length < 2)
-   return "";
+   return '';
   return decodeURIComponent(matches[1]);
  },
  _getOriginalPage: function(noEnd)
@@ -131,7 +131,7 @@ var Fierr_PageScript =
   var location = window.content.location.href;
   if (noEnd==true)
   {
-   var parts = location.split("#");
+   var parts = location.split('#');
    return parts[0];
   }
   else
@@ -152,7 +152,7 @@ var Fierr_PageScript =
  },
  stopReload: function()
  {
-  var cmdStop = document.getElementById("tryStop");
+  var cmdStop = document.getElementById('tryStop');
   if (cmdStop)
   {
    clearTimeout(Fierr_PageScript._TimerID);
@@ -168,97 +168,97 @@ var Fierr_PageScript =
  googlePage: function()
  {
   Fierr_PageScript.stopReload();
-  window.content.location.href = "http://www.google.com/search?q=" + Fierr_PageScript._getOriginalPage(false);
+  window.content.location.href = 'http://www.google.com/search?q=' + Fierr_PageScript._getOriginalPage(false);
  },
  isupPage: function()
  {
   Fierr_PageScript.stopReload();
-  window.content.location.href = "http://isup.me/" + Fierr_PageScript._getOriginalPage(true);
+  window.content.location.href = 'http://isup.me/' + Fierr_PageScript._getOriginalPage(true);
  },
  _getDescription: function()
  {
   var url = document.documentURI;
   var desc = url.search(/d\=/);
-  if (desc == -1)
-   return "";
+  if (desc === -1)
+   return '';
   return decodeURIComponent(url.slice(desc + 2));
  },
  initPage: function()
  {
   var err = Fierr_PageScript._getErrorCode();
-  var errTitle = document.getElementById("et_" + err);
-  var errDesc  = document.getElementById("ed_" + err);
+  var errTitle = document.getElementById('et_' + err);
+  var errDesc  = document.getElementById('ed_' + err);
   if (!errTitle || !errDesc)
   {
-   errTitle = document.getElementById("et_generic");
-   errDesc  = document.getElementById("ed_generic");
+   errTitle = document.getElementById('et_generic');
+   errDesc  = document.getElementById('ed_generic');
   }
-  var title = document.getElementsByClassName("errorTitleText")[0];
+  var title = document.getElementsByClassName('errorTitleText')[0];
   if (title)
   {
    title.parentNode.replaceChild(errTitle, title);
-   errTitle.classList.add("errorTitleText");
+   errTitle.classList.add('errorTitleText');
   }
-  var sd = document.getElementById("errorShortDescText");
+  var sd = document.getElementById('errorShortDescText');
   if (sd)
    sd.textContent = Fierr_PageScript._getDescription();
-  var ld = document.getElementById("errorLongDesc");
+  var ld = document.getElementById('errorLongDesc');
   if (ld)
   {
    ld.parentNode.replaceChild(errDesc, ld);
-   errDesc.id = "errorLongDesc";
+   errDesc.id = 'errorLongDesc';
   }
   Fierr_PageScript._Seconds = Fierr_PageScript._DefaultTime;
-  var cmdStop = document.getElementById("tryStop");
-  var lblStop = document.getElementById("lblStop");
-  if(err == "connectionFailure" || err == "netTimeout" ||
-     err == "netReset" || err == "netInterrupt" ||
-     err == "proxyResolveFailure" || err == "proxyConnectFailure" ||
-     err == "dnsNotFound")
+  var cmdStop = document.getElementById('tryStop');
+  var lblStop = document.getElementById('lblStop');
+  if(err === 'connectionFailure' || err === 'netTimeout' ||
+     err === 'netReset' || err === 'netInterrupt' ||
+     err === 'proxyResolveFailure' || err === 'proxyConnectFailure' ||
+     err === 'dnsNotFound')
   {
-   lblStop.textContent = Fierr_PageScript._errStopReload + " (" + Fierr_PageScript._Seconds + ")";
+   lblStop.textContent = Fierr_PageScript._errStopReload + ' (' + Fierr_PageScript._Seconds + ')';
    Fierr_PageScript._TimerID = setTimeout(Fierr_PageScript.UpdateTimer, 1000);
   }
   else
   {
    cmdStop.parentNode.removeChild(cmdStop);
   }
-  var errContainer = document.getElementById("errorContainer");
+  var errContainer = document.getElementById('errorContainer');
   errContainer.parentNode.removeChild(errContainer);
   var className = Fierr_PageScript._getCSSClass();
-  if (className && className != "expertBadCert")
+  if (className && className !== 'expertBadCert')
   {
    document.documentElement.className = className;
-   var favicon = document.getElementById("favicon");
+   var favicon = document.getElementById('favicon');
    var faviconParent = favicon.parentNode;
    faviconParent.removeChild(favicon);
-   favicon.setAttribute("href", "chrome://global/skin/icons/" + className + "_favicon.png");
+   favicon.setAttribute('href', 'chrome://global/skin/icons/' + className + '_favicon.png');
    faviconParent.appendChild(favicon);
   }
-  if (className == "expertBadCert")
+  if (className === 'expertBadCert')
   {
    Fierr_PageScript.showSecuritySection();
   }
-  if (err == "remoteXUL")
+  if (err === 'remoteXUL')
   {
-   document.getElementById("tryAgain").style.display = "none";
+   document.getElementById('tryAgain').style.display = 'none';
   }
-  if (err == "cspFrameAncestorBlocked")
+  if (err === 'cspFrameAncestorBlocked')
   {
-   document.getElementById("tryAgain").style.display = "none";
+   document.getElementById('tryAgain').style.display = 'none';
   }
-  if (err == "nssBadCert")
+  if (err === 'nssBadCert')
   {
-   document.getElementById("tryAgain").style.display = "none";
-   document.getElementById("errorPage").setAttribute("class", "certerror");
+   document.getElementById('tryAgain').style.display = 'none';
+   document.getElementById('errorPage').setAttribute('class', 'certerror');
    Fierr_PageScript._addDomainErrorLink();
   }
   else
   {
-   var secOverride = document.getElementById("securityOverrideDiv");
+   var secOverride = document.getElementById('securityOverrideDiv');
    secOverride.parentNode.removeChild(secOverride);
   }
-  var wifiButton = document.getElementById("wifi");
+  var wifiButton = document.getElementById('wifi');
   if (wifiButton)
   {
    var wifi1x = 'data:[IMAGE_BUTTON_GO_ONLINE_MIME];base64,[IMAGE_BUTTON_GO_ONLINE]';
@@ -268,11 +268,11 @@ var Fierr_PageScript =
    setTimeout(
     function()
     {
-     if (wifiButton.style.display != 'none')
+     if (wifiButton.style.display !== 'none')
       Fierr_PageScript.stopReload();
     }, 50);
   }
-  var searchButton = document.getElementById("searchbutton");
+  var searchButton = document.getElementById('searchbutton');
   if (searchButton)
   {
    var search1x = 'data:[IMAGE_BUTTON_SEARCH_MIME];base64,[IMAGE_BUTTON_SEARCH]';
@@ -283,7 +283,7 @@ var Fierr_PageScript =
  },
  _addDomainErrorLink: function()
  {
-  var sd = document.getElementById("errorShortDescText");
+  var sd = document.getElementById('errorShortDescText');
   if (sd)
   {
    var desc = Fierr_PageScript._getDescription();
@@ -291,30 +291,30 @@ var Fierr_PageScript =
    var result = re.exec(desc);
    if (!result)
     return;
-   sd.textContent = "";
+   sd.textContent = '';
    sd.appendChild(document.createTextNode(desc.slice(0, result.index)));
-   var anchorEl = document.createElement("a");
-   anchorEl.setAttribute("id", "cert_domain_link");
-   anchorEl.setAttribute("title", result[1]);
+   var anchorEl = document.createElement('a');
+   anchorEl.setAttribute('id', 'cert_domain_link');
+   anchorEl.setAttribute('title', result[1]);
    anchorEl.appendChild(document.createTextNode(result[1]));
    sd.appendChild(anchorEl);
-   sd.appendChild(document.createTextNode(desc.slice(desc.indexOf("</a>") + "</a>".length)));
+   sd.appendChild(document.createTextNode(desc.slice(desc.indexOf('</a>') + '</a>'.length)));
   }
   var link = document.getElementById('cert_domain_link');
   if (!link)
    return;
-  var okHost = link.getAttribute("title");
+  var okHost = link.getAttribute('title');
   var thisHost = document.location.hostname;
   var proto = document.location.protocol;
-  okHost = okHost.replace(/^\*\./, "www.");
-  if (Fierr_PageScript._endsWith(okHost, "." + thisHost))
+  okHost = okHost.replace(/^\*\./, 'www.');
+  if (Fierr_PageScript._endsWith(okHost, '.' + thisHost))
    link.href = proto + okHost;
-  if (Fierr_PageScript._endsWith(thisHost, "." + okHost))
+  if (Fierr_PageScript._endsWith(thisHost, '.' + okHost))
    link.href = proto + okHost;
  },
  _endsWith: function(haystack, needle)
  {
-  return haystack.slice(-needle.length) == needle;
+  return haystack.slice(-needle.length) === needle;
  },
  UpdateTimer: function()
  {
@@ -324,9 +324,9 @@ var Fierr_PageScript =
    Fierr_PageScript._TimerID = 0;
   }
   Fierr_PageScript._Seconds--;
-  var cmdStop = document.getElementById("tryStop");
-  var lblStop = document.getElementById("lblStop");
-  if (Fierr_PageScript._Seconds == 0)
+  var cmdStop = document.getElementById('tryStop');
+  var lblStop = document.getElementById('lblStop');
+  if (Fierr_PageScript._Seconds === 0)
   {
    lblStop.textContent = Fierr_PageScript._errReloading;
    cmdStop.disabled = true;
@@ -336,7 +336,7 @@ var Fierr_PageScript =
   else
   {
    cmdStop.disabled = false;
-   lblStop.textContent = Fierr_PageScript._errStopReload + " (" + Fierr_PageScript._Seconds + ")";
+   lblStop.textContent = Fierr_PageScript._errStopReload + ' (' + Fierr_PageScript._Seconds + ')';
    Fierr_PageScript._TimerID = setTimeout(Fierr_PageScript.UpdateTimer, 1000);
   }
  },

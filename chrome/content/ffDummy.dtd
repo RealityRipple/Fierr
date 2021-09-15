@@ -4,6 +4,7 @@
 <!ENTITY unsafeContentType.longDesc "">
 <!ENTITY nssFailure2.title "">
 <!ENTITY nssFailure2.longDesc "">
+<!ENTITY nssFailure2.longDesc2 "">
 <!ENTITY nssBadCert.title "">
 <!ENTITY nssBadCert.longDesc2 "">
 <!ENTITY malwareBlocked.title "">
@@ -18,6 +19,8 @@
 <!ENTITY netOffline.longDesc2 "">
 <!ENTITY netOffline.longDesc3 "">
 <!ENTITY netOffline2.longDesc "">
+<!ENTITY fileAccessDenied.title "">
+<!ENTITY fileAccessDenied.longDesc "">
 <!ENTITY unknownProtocolFound.title "">
 <!ENTITY unknownProtocolFound.longDesc "">
 <!ENTITY protocolNotFound.title "">
@@ -26,10 +29,16 @@
 <!ENTITY notCached.longDesc "">
 <!ENTITY cspFrameAncestorBlocked.title "">
 <!ENTITY cspFrameAncestorBlocked.longDesc "">
+<!ENTITY cspBlocked.title "">
+<!ENTITY cspBlocked.longDesc "">
 <!ENTITY remoteXUL.title "">
 <!ENTITY remoteXUL.longDesc "">
 <!ENTITY corruptedContentError.title "">
 <!ENTITY corruptedContentError.longDesc "">
+<!ENTITY corruptedContentErrorv2.title "">
+<!ENTITY corruptedContentErrorv2.longDesc "">
+<!ENTITY inadequateSecurityError.title "">
+<!ENTITY inadequateSecurityError.longDesc "">
 <!ENTITY dnsNotFound.longDesc "">
 <!ENTITY dnsNotFound.longDesc2 "">
 <!ENTITY dnsNotFound.longDesc3 "">

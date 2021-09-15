@@ -104,6 +104,24 @@ ul
 {
  display: none;
 }
+#securityOverrideDiv
+{
+ padding-top: 10px;
+ padding-bottom: 10px;
+}
+#securityOverrideContent
+{
+ background: #FFFFC0;
+ padding: 10px;
+ border-radius: 10px;
+ box-shadow: 2px 2px 3px #000000;
+ text-align: end;
+}
+#securityOverrideContent p
+{
+ text-align: start;
+ font-weight: bold;
+}
 button
 {
  min-width: 100px;
@@ -446,7 +464,7 @@ var Fierr_PageScript =
     <div id="errorLongDesc" />
     <div id="securityOverrideDiv">
      <a id="securityOverrideLink" href="javascript:Fierr_PageScript.showSecuritySection();">&securityOverride.linkText;</a>
-     <div id="securityOverrideContent" style="display: none;">&securityOverride.warningText;</div>
+     <div id="securityOverrideContent" style="display: none;">&securityOverride.warningContent;</div>
      <br />
     </div>
    </div>

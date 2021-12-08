@@ -4,3 +4,4 @@
 <!ENTITY errGoOnline.label "Online Ol">
 <!ENTITY errStopReload.label "Yeniden Yüklemeyi Durdur">
 <!ENTITY errReloading.label "Yeniden Yükleniyor...">
+<!ENTITY errIsUp.label "Durum">

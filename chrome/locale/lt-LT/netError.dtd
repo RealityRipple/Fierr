@@ -4,3 +4,4 @@
 <!ENTITY errGoOnline.label "Jungtis">
 <!ENTITY errStopReload.label "Stabdyti perkrovimą">
 <!ENTITY errReloading.label "Perkrovimas..">
+<!ENTITY errIsUp.label "Būsena">

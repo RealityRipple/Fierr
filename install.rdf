@@ -3,7 +3,7 @@
  <Description about="urn:mozilla:install-manifest">
   <em:name>Fierr</em:name>
   <em:id>{AF1AD85E-20B4-517C-9A93-B3E51B6EB86F}</em:id>
-  <em:version>2.5</em:version>
+  <em:version>2.6</em:version>
   <em:type>2</em:type>
   <!-- Firefox -->
   <em:targetApplication>

@@ -4,3 +4,4 @@
 <!ENTITY errGoOnline.label "Перейти в мережу">
 <!ENTITY errStopReload.label "Зупинити перезавантаження">
 <!ENTITY errReloading.label "Перезавантаження...">
+<!ENTITY errIsUp.label "Статус">

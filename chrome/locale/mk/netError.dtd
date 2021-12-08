@@ -4,3 +4,4 @@
 <!ENTITY errGoOnline.label "Оди на интернет">
 <!ENTITY errStopReload.label "Запри го превчитувањето">
 <!ENTITY errReloading.label "Превчитување...">
+<!ENTITY errIsUp.label "Статус">

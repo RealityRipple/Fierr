@@ -2,12 +2,7 @@
 Replace your error page with a more stylish appearance with additional features.
 
 #### Supports
- * Pale Moon [25.0a1pre - 29.*]
- * Firefox [1.5 - 50.*]
  * SeaMonkey [2.0a1 - 2.*]
- * Fennec [2.0a1 - 40.*]
- * Firefox for Android [10.0a1 - 56.*]
- * AdBlock Browser [1.0 - 1.3.2]
 
 ## Building
 Simply download the contents of the repository and pack the contents (sans git data) into a .zip file. Then, rename the file to .xpi and drag into the browser.

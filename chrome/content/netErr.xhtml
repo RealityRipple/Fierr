@@ -100,6 +100,10 @@ ul
 {
  margin-right: 1em;
 }
+#errIsUp
+{
+ -moz-margin-start: 80px;
+}
 #errorContainer
 {
  display: none;
@@ -237,8 +241,76 @@ var Fierr_PageScript =
  },
  isupPage: function()
  {
+  var q = '[IMAGE_BUTTON_STATUS_MIME];base64,[IMAGE_BUTTON_STATUS]';
+  var y = '[IMAGE_BUTTON_STATUS_Y_MIME];base64,[IMAGE_BUTTON_STATUS_Y]';
+  var n = '[IMAGE_BUTTON_STATUS_N_MIME];base64,[IMAGE_BUTTON_STATUS_N]';
+  var pgURL = Fierr_PageScript._getOriginalPage(true);
+  if (pgURL.indexOf(':') > -1)
+   pgURL = pgURL.slice(pgURL.indexOf(':') + 1);
+  while (pgURL.slice(0, 1) === '/')
+   pgURL = pgURL.slice(1);
+  if (pgURL.indexOf('/') > -1)
+   pgURL = pgURL.slice(0, pgURL.indexOf('/'));
   Fierr_PageScript.stopReload();
-  window.content.location.href = 'http://isup.me/' + Fierr_PageScript._getOriginalPage(true);
+  var cmdUp = document.getElementById('tryIsUp');
+  var lblUp = document.getElementById('errIsUp');
+  lblUp.innerHTML = 'Checking...';
+  cmdUp.disabled = true;
+  cmdUp.getElementsByTagName('img')[0].setAttribute('src', 'data:' + q);
+  var xhr = new XMLHttpRequest()
+  xhr.onreadystatechange = function()
+  {
+   if (xhr.readyState !== 4)
+    return;
+   xhr.onreadystatechange = null;
+   cmdUp.disabled = false;
+   if (xhr.status !== 200)
+   {
+    cmdUp.getElementsByTagName('img')[0].setAttribute('src', 'data:' + q);
+    lblUp.innerHTML = 'Error Checking URL. The check server may be down.';
+    return;
+   }
+   var r = xhr.responseText;
+   switch(r)
+   {
+    case 'no u':
+     cmdUp.getElementsByTagName('img')[0].setAttribute('src', 'data:' + q);
+     lblUp.innerHTML = 'Error Checking URL. There was a communication error.';
+     break;
+    case 'bad u':
+     cmdUp.getElementsByTagName('img')[0].setAttribute('src', 'data:' + q);
+     lblUp.innerHTML = 'Error Checking URL. The URL contains invalid characters.';
+     break;
+    case 'no ip':
+     cmdUp.getElementsByTagName('img')[0].setAttribute('src', 'data:' + n);
+     lblUp.innerHTML = 'Unable to find an IP address. This URL may not exist.';
+     break;
+    case 'no socket':
+     cmdUp.getElementsByTagName('img')[0].setAttribute('src', 'data:' + n);
+     lblUp.innerHTML = 'The server did not accept a connection.';
+     break;
+    case 'no http':
+     cmdUp.getElementsByTagName('img')[0].setAttribute('src', 'data:' + n);
+     lblUp.innerHTML = 'The server did not respond to an HTTP request.';
+     break;
+    default:
+     if (r.slice(0, 5) === 'HTTP/')
+     {
+      cmdUp.getElementsByTagName('img')[0].setAttribute('src', 'data:' + y);
+      lblUp.innerHTML = 'The server appears to be up.';
+     }
+     else
+     {
+      cmdUp.getElementsByTagName('img')[0].setAttribute('src', 'data:' + q);
+      lblUp.innerHTML = 'The server responded with an unknown error:' + r;
+     }
+     break;
+   }
+  }
+  xhr.open('POST', 'https://realityripple.com/test.php');
+  xhr.timeout = 10000;
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.send('u=' + pgURL);
  },
  goOnline: function()
  {
@@ -476,6 +548,7 @@ var Fierr_PageScript =
     <button type="button" id="tryOn"     onclick="Fierr_PageScript.goOnline();"><img src="data:[IMAGE_BUTTON_GO_ONLINE_MIME];base64,[IMAGE_BUTTON_GO_ONLINE]" alt="" title="&errGoOnline.label;" />&errGoOnline.label;</button>
     <button type="button" id="tryStop"   onclick="Fierr_PageScript.stopReload();"><img src="data:[IMAGE_BUTTON_STOP_RELOAD_MIME];base64,[IMAGE_BUTTON_STOP_RELOAD]" alt="" title="&errStopReload.label;" /><span id="lblStop">&errStopReload.label;</span></button>
    </div>
+   <div id="errIsUp"></div>
   </div>
   <script type="application/x-javascript">Fierr_PageScript.initPage();</script>
  </body>
